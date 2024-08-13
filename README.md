@@ -1,4 +1,5 @@
-# This repo provides examples on how to launch distributed training on A3-Mega (H100x8) on Vertex
+# Distributed Training on A3-Mega (H100x8) with Vertex
+This repo provides examples on how to launch distributed training on A3-Mega (H100x8) on Vertex
 
 This repo contains:
 
