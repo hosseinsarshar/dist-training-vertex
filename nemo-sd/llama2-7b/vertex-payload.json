@@ -1,0 +1,76 @@
+{
+    "displayName": "hossein_nemo_reservation",
+    "jobSpec": {
+      "workerPoolSpecs": [
+        {   
+          "machineSpec": {
+            "machineType": "a3-megagpu-8g",
+            "acceleratorType": "NVIDIA_H100_MEGA_80GB",
+            "acceleratorCount": 8,
+            "reservationAffinity": {
+              "reservationAffinityType": "SPECIFIC_RESERVATION",
+              "key": "compute.googleapis.com/reservation-name",
+              "values": [
+                  "projects/disco-sector-292704/zones/us-east4-a/reservations/snap-a3-mega-reservation"
+              ]   
+            }
+          },  
+          "replicaCount": "1",
+          "containerSpec": {
+            "imageUri": "classicboyir/nemo:03",
+            "command": [
+                "sh", "-c"
+            ],
+            "args": [
+              "git clone https://github.com/hosseinsarshar/a3-bandwidth-test.git && chmod +x ./a3-bandwidth-test/a3-mega/vertex/nemo/job/job_template.sh && ./a3-bandwidth-test/a3-mega/vertex/nemo/job/job_template.sh"
+            ],
+            "env": [
+                {
+                  "name": "LD_LIBRARY_PATH",
+                  "value": "/usr/local/nvidia/lib64"
+                },
+                {
+                  "name": "NNODES",
+                  "value": "2"
+                }
+            ]
+          }
+        },
+        {
+          "machineSpec": {
+            "machineType": "a3-megagpu-8g",
+            "acceleratorType": "NVIDIA_H100_MEGA_80GB",
+            "acceleratorCount": 8,
+            "reservationAffinity": {
+              "reservationAffinityType": "SPECIFIC_RESERVATION",
+              "key": "compute.googleapis.com/reservation-name",
+              "values": [
+                  "projects/disco-sector-292704/zones/us-east4-a/reservations/snap-a3-mega-reservation"
+              ]   
+            }
+          },
+          "replicaCount": "1",
+          "containerSpec": {
+            "imageUri": "classicboyir/nemo:03",
+            "command": [
+                "sh", "-c"
+            ],
+            "args": [
+              "git clone https://github.com/hosseinsarshar/a3-bandwidth-test.git && chmod +x ./a3-bandwidth-test/a3-mega/vertex/nemo/job/job_template.sh && ./a3-bandwidth-test/a3-mega/vertex/nemo/job/job_template.sh"
+            ],
+            "env": [
+                {
+                  "name": "LD_LIBRARY_PATH",
+                  "value": "/usr/local/nvidia/lib64"
+                },
+                {
+                  "name": "NNODES",
+                  "value": "2"
+                }
+            ]
+          }
+        }
+      ],
+      "enableWebAccess": true
+    }
+  }
