@@ -141,7 +141,7 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     --rdzv_id $CLOUD_ML_JOB_ID \
     --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT \
     NemoHossein/examples/nlp/language_modeling/megatron_gpt_pretraining.py \
-    --config-path="/workspace/a3-bandwidth-test/a3-mega/vertex/nemo/nemo-configs" \
+    --config-path="/workspace/dist-training-vertex/nemo/llama2-7b/" \
     --config-name="llama7b-bf16-16gpus.yaml" \
     +trainer.num_nodes="$NNODES" \
     +exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" \
