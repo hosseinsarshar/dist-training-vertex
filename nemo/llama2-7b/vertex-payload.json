@@ -1,5 +1,5 @@
 {
-    "displayName": "hossein_nemo_reservation",
+    "displayName": "nemo_llama2_7b",
     "jobSpec": {
       "workerPoolSpecs": [
         {   
@@ -10,21 +10,17 @@
           },  
           "replicaCount": "1",
           "containerSpec": {
-            "imageUri": "classicboyir/nemo:03",
+            "imageUri": "classicboyir/nemo:02",
             "command": [
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/a3-bandwidth-test.git && chmod +x ./a3-bandwidth-test/a3-mega/vertex/nemo/job/job_template.sh && ./a3-bandwidth-test/a3-mega/vertex/nemo/job/job_template.sh"
+                "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh && sleep infinity"
             ],
             "env": [
                 {
-                  "name": "LD_LIBRARY_PATH",
-                  "value": "/usr/local/nvidia/lib64"
-                },
-                {
                   "name": "NNODES",
-                  "value": "2"
+                  "value": "4"
                 }
             ]
           }
@@ -35,23 +31,19 @@
             "acceleratorType": "NVIDIA_H100_MEGA_80GB",
             "acceleratorCount": 8
           },
-          "replicaCount": "1",
+          "replicaCount": "3",
           "containerSpec": {
-            "imageUri": "classicboyir/nemo:03",
+            "imageUri": "classicboyir/nemo:02",
             "command": [
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/a3-bandwidth-test.git && chmod +x ./a3-bandwidth-test/a3-mega/vertex/nemo/job/job_template.sh && ./a3-bandwidth-test/a3-mega/vertex/nemo/job/job_template.sh"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh && sleep infinity"
             ],
             "env": [
                 {
-                  "name": "LD_LIBRARY_PATH",
-                  "value": "/usr/local/nvidia/lib64"
-                },
-                {
                   "name": "NNODES",
-                  "value": "2"
+                  "value": "4"
                 }
             ]
           }

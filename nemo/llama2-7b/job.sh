@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # to view GPU activities on the web terminal
 pip install nvitop
 
@@ -27,23 +35,16 @@ export NCCL_TUNER_CONFIG_PATH=${NCCL_LIB_DIR}/a3plus_tuner_config.textproto
 export NCCL_SHIMNET_GUEST_CONFIG_CHECKER_CONFIG_FILE=${NCCL_LIB_DIR}/a3plus_guest_config.textproto
 export NCCL_FASTRAK_PLUGIN_ACCEPT_TIMEOUT_MS=600000
 export NCCL_NVLS_ENABLE=0
+export LD_LIBRARY_PATH=${NCCL_LIB_DIR}:${LD_LIBRARY_PATH}
 
-# Todo: remove this
-export TORCH_DISTRIBUTED_DEBUG=OFF
-export TORCH_LOGS="all"
-export TORCHDYNAMO_VERBOSE=0
+# export LD_LIBRARY_PATH="/usr/local/nccl-plugin/lib64:/usr/local/cuda/targets/x86_64-linux/lib/:/usr/local/nvidia/lib64"
+# export LIBRARY_PATH="/usr/local/cuda/lib64/stubs" 
 
 ## To turn on debugging
 # export TORCH_CPP_LOG_LEVEL=INFO # this is to turn on the verbose torch logs
 # export TORCH_DISTRIBUTED_DEBUG=DETAIL
 # export TORCH_LOGS="+dynamo"
 # export TORCHDYNAMO_VERBOSE=1
-
-export NODE_RANK=$RANK
-export GPUS_PER_NODE=8
-export WORLD_SIZE=$((NNODES * GPUS_PER_NODE))
-export MASTER_PORT=2222
-export GLOBAL_BATCH_SIZE=$((WORLD_SIZE*2))
 
 echo "Downloading GPT vocabulary files"
 wget https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-vocab.json &&\
@@ -60,7 +61,7 @@ export WORLD_SIZE=$((NNODES * GPUS_PER_NODE))
 export MASTER_PORT=2222
 export GLOBAL_BATCH_SIZE=$((WORLD_SIZE*2))
 
-echo "sleep for 60 seconds"
+echo "sleep for 10 seconds to let services boot up"
 sleep 10
 
 echo RANK:$RANK
