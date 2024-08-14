@@ -37,6 +37,7 @@ export NCCL_FASTRAK_PLUGIN_ACCEPT_TIMEOUT_MS=600000
 export NCCL_NVLS_ENABLE=0
 export LD_LIBRARY_PATH=${NCCL_LIB_DIR}:${LD_LIBRARY_PATH}
 
+
 # /usr/local/nvidia/lib64:/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/tensorrt/lib
 # export LD_LIBRARY_PATH="/usr/local/nccl-plugin/lib64:/usr/local/cuda/targets/x86_64-linux/lib/:/usr/local/nvidia/lib64"
 # export LIBRARY_PATH="/usr/local/cuda/lib64/stubs" 
