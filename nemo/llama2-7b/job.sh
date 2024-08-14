@@ -67,14 +67,14 @@ mkdir -p /tmp/exp/
 mkdir -p /tmp/nemo-experiments/results
 mkdir -p /tmp/index_mapping_dir
 
+echo "sleep for 10 seconds to let services boot up"
+sleep 10
+
 export NODE_RANK=$RANK         
 export GPUS_PER_NODE=8
 export WORLD_SIZE=$((NNODES * GPUS_PER_NODE))
 export MASTER_PORT=2222
 export GLOBAL_BATCH_SIZE=$((WORLD_SIZE*2))
-
-echo "sleep for 10 seconds to let services boot up"
-sleep 10
 
 echo RANK:$RANK
 echo NODE_RANK:$NODE_RANK
@@ -92,7 +92,7 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     --rdzv_id $CLOUD_ML_JOB_ID \
     --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT \
     /opt/NeMo/examples/nlp/language_modeling/megatron_gpt_pretraining.py \
-    --config-path="dist-training-vertex/nemo/llama2-7b/" \
+    --config-path="/workspace/dist-training-vertex/nemo/llama2-7b/" \
     --config-name="llama2-7b.yaml" \
     +trainer.num_nodes="$NNODES" \
     +exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" \
