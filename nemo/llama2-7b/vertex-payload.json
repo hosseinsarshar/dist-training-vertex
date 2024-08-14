@@ -9,19 +9,27 @@
             "acceleratorCount": 8
           },  
           "replicaCount": "1",
+          "diskSpec": {
+            "bootDiskType": "pd-ssd",
+            "bootDiskSizeGb": 100
+          },    
           "containerSpec": {
             "imageUri": "classicboyir/nemo:02",
             "command": [
                 "sh", "-c"
             ],
             "args": [
-                "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh && sleep infinity"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh && sleep infinity"
             ],
             "env": [
-                {
-                  "name": "NNODES",
-                  "value": "4"
-                }
+              {
+                "name": "LD_LIBRARY_PATH",
+                "value": "/usr/local/nvidia/lib64"
+              },
+              {
+                "name": "NNODES",
+                "value": "4"
+              }
             ]
           }
         },
@@ -32,6 +40,10 @@
             "acceleratorCount": 8
           },
           "replicaCount": "3",
+          "diskSpec": {
+            "bootDiskType": "pd-ssd",
+            "bootDiskSizeGb": 100
+          },    
           "containerSpec": {
             "imageUri": "classicboyir/nemo:02",
             "command": [
@@ -41,10 +53,14 @@
               "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh && sleep infinity"
             ],
             "env": [
-                {
-                  "name": "NNODES",
-                  "value": "4"
-                }
+              {
+                "name": "LD_LIBRARY_PATH",
+                "value": "/usr/local/nvidia/lib64"
+              },
+              {
+                "name": "NNODES",
+                "value": "4"
+              }
             ]
           }
         }
