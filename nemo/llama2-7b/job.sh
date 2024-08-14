@@ -41,7 +41,17 @@ export LD_LIBRARY_PATH=${NCCL_LIB_DIR}:${LD_LIBRARY_PATH}
 # export LD_LIBRARY_PATH="/usr/local/nccl-plugin/lib64:/usr/local/cuda/targets/x86_64-linux/lib/:/usr/local/nvidia/lib64"
 # export LIBRARY_PATH="/usr/local/cuda/lib64/stubs" 
 
-## To turn on debugging
+export LD_LIBRARY_PATH="/usr/local/nccl-plugin/lib64:/usr/local/nvidia/lib64/:${LD_LIBRARY_PATH}"
+echo "Warning: Set LD_LIBRARY_PATH=$LD_LIBRARY_PATH to override the NCCL library"
+
+ldconfig /usr/local/nvidia/lib64/
+echo "Added /usr/local/nvidia/lib64/ to ldconfig:"
+ldconfig -p | grep libcuda | sed 's/^/  /'
+
+echo "Contents of /usr/local/nccl-plugin/lib64:"
+ls /usr/local/nccl-plugin/lib64 | sed 's/^/  /'
+
+## To turn on for debugging
 # export TORCH_CPP_LOG_LEVEL=INFO # this is to turn on the verbose torch logs
 # export TORCH_DISTRIBUTED_DEBUG=DETAIL
 # export TORCH_LOGS="+dynamo"
