@@ -6,14 +6,7 @@
           "machineSpec": {
             "machineType": "a3-megagpu-8g",
             "acceleratorType": "NVIDIA_H100_MEGA_80GB",
-            "acceleratorCount": 8,
-            "reservationAffinity": {
-              "reservationAffinityType": "SPECIFIC_RESERVATION",
-              "key": "compute.googleapis.com/reservation-name",
-              "values": [
-                  "projects/disco-sector-292704/zones/us-east4-a/reservations/snap-a3-mega-reservation"
-              ]   
-            }
+            "acceleratorCount": 8
           },  
           "replicaCount": "1",
           "containerSpec": {
@@ -40,14 +33,7 @@
           "machineSpec": {
             "machineType": "a3-megagpu-8g",
             "acceleratorType": "NVIDIA_H100_MEGA_80GB",
-            "acceleratorCount": 8,
-            "reservationAffinity": {
-              "reservationAffinityType": "SPECIFIC_RESERVATION",
-              "key": "compute.googleapis.com/reservation-name",
-              "values": [
-                  "projects/disco-sector-292704/zones/us-east4-a/reservations/snap-a3-mega-reservation"
-              ]   
-            }
+            "acceleratorCount": 8
           },
           "replicaCount": "1",
           "containerSpec": {
