@@ -1,5 +1,5 @@
 {
-    "displayName": "nemo_llama2_7b_8_nodes",
+    "displayName": "nemo_llama2_7b",
     "jobSpec": {
       "workerPoolSpecs": [
         {   
@@ -19,7 +19,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/training-launcher.sh && ./dist-training-vertex/nemo/llama2-7b/training-launcher.sh && sleep infinity"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh"
             ],
             "env": [
               {
@@ -28,7 +28,7 @@
               },
               {
                 "name": "NNODES",
-                "value": "8"
+                "value": "4"
               }
             ]
           }
@@ -39,7 +39,7 @@
             "acceleratorType": "NVIDIA_H100_MEGA_80GB",
             "acceleratorCount": 8
           },
-          "replicaCount": "7",
+          "replicaCount": "3",
           "diskSpec": {
             "bootDiskType": "pd-ssd",
             "bootDiskSizeGb": 100
@@ -50,7 +50,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/training-launcher.sh && ./dist-training-vertex/nemo/llama2-7b/training-launcher.sh && sleep infinity"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh"
             ],
             "env": [
               {
@@ -59,7 +59,7 @@
               },
               {
                 "name": "NNODES",
-                "value": "8"
+                "value": "4"
               }
             ]
           }
