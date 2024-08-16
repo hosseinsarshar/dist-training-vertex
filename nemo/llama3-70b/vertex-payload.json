@@ -19,7 +19,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && git checkout origin/llama3-70b && chmod +x ./dist-training-vertex/nemo/llama3-70b/job.sh && ./dist-training-vertex/nemo/llama3-70b/job.sh"
+              "git clonem -b origin/7b-debug https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama3-70b/job.sh && ./dist-training-vertex/nemo/llama3-70b/job.sh"
             ],
             "env": [
               {
@@ -50,7 +50,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && git checkout origin/llama3-70b && chmod +x ./dist-training-vertex/nemo/llama3-70b/job.sh && ./dist-training-vertex/nemo/llama3-70b/job.sh"
+              "git clone -b origin/7b-debug https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama3-70b/job.sh && ./dist-training-vertex/nemo/llama3-70b/job.sh"
             ],
             "env": [
               {
