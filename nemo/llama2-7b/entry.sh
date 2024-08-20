@@ -177,7 +177,7 @@ OMP_NUM_THREADS=12 torchrun \
 --master_addr ${master_addr} \
 --master_port ${master_port} \
 ${TORCH_DISTRIBUTED_TARGET} \
---config-path="/workspace" \
+--config-path="/workspace/dist-training-vertex/nemo/llama2-7b/" \
 --config-name="${CONFIG_NAME}" \
 +trainer.num_nodes="${nnodes}" \
 +model.data.data_prefix="${data_prefix}" \
@@ -264,3 +264,13 @@ OMP_NUM_THREADS=12 torchrun \
 --rdzv_backend=c10d \
 --rdzv-endpoint="localhost:${master_port}" \
 hello_world.py
+
+# export NCCL_LIB_DIR=/usr/local/nvidia/lib64
+# export GPUS_PER_NODE=8
+# export NCCL_DEBUG=VERSION
+# export JOB_ID=nemo-llama3-70b-64g-202408070414
+# export OUTPUT_GCS_PATH_PREFIX=gs://jk-vertex-staging-us-east4/nemo_jobs
+# export GCS_DATA_SOURCE=gs://nemo-megatron-demo/training-data/tokenized/bpe2gpt/wikipedia
+# export DATA_PREFIX=wikipedia-tokenized-for-gpt2
+# export CONFIG_NAME=j-llama3-70b-fp8.yaml
+# export TORCH_DISTRIBUTED_TARGET=/opt/NeMo/examples/nlp/language_modeling/megatron_gpt_pretraining.py

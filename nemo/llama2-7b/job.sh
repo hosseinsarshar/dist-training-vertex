@@ -109,6 +109,9 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
 
 # clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh
 
+# clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh
+
+
 # ps aux | grep '[p]ython' | awk '{print $2}' | xargs -I {} kill -9 {}
 
 # nvitop
