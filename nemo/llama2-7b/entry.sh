@@ -66,7 +66,7 @@ OMP_NUM_THREADS=12 torchrun \
 --node_rank ${node_rank} \
 --rdzv_backend=static \
 --rdzv-endpoint="${master_addr}:${master_port}" \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 exit 0
 
@@ -76,7 +76,7 @@ OMP_NUM_THREADS=12 torchrun \
 --node_rank ${node_rank} \
 --master_addr ${master_addr} \
 --master_port ${master_port} \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 exit 0
 
@@ -87,7 +87,7 @@ OMP_NUM_THREADS=12 torchrun \
 --rdzv_backend=c10d \
 --rdzv-endpoint="${master_addr}:${master_port}" \
 --rdzv-conf=is_host=$(if ((RANK)); then echo 0; else echo 1; fi) \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 
 OMP_NUM_THREADS=12 torchrun \
@@ -96,7 +96,7 @@ OMP_NUM_THREADS=12 torchrun \
 --rdzv_id=101 \
 --rdzv_backend=c10d \
 --rdzv-endpoint="${master_addr}:${master_port}" \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 
 
@@ -192,7 +192,7 @@ OMP_NUM_THREADS=12 torchrun \
 --node_rank ${node_rank} \
 --master_addr ${master_addr} \
 --master_port ${master_port} \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 
 OMP_NUM_THREADS=12 torchrun \
@@ -200,7 +200,7 @@ OMP_NUM_THREADS=12 torchrun \
 --nnodes=${nnodes} \
 --master_addr ${master_addr} \
 --master_port ${master_port} \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 
 OMP_NUM_THREADS=12 torchrun \
@@ -209,7 +209,7 @@ OMP_NUM_THREADS=12 torchrun \
 --rdzv_id=101 \
 --rdzv_backend=c10d \
 --rdzv-endpoint="${master_addr}:${master_port}" \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 
 OMP_NUM_THREADS=12 torchrun \
@@ -218,7 +218,7 @@ OMP_NUM_THREADS=12 torchrun \
 --node_rank ${node_rank} \
 --rdzv_backend=static \
 --rdzv-endpoint="${master_addr}:${master_port}" \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 OMP_NUM_THREADS=12 torchrun \
 --nproc_per_node=${GPUS_PER_NODE} \
@@ -226,7 +226,7 @@ OMP_NUM_THREADS=12 torchrun \
 --rdzv_id=101 \
 --rdzv_backend=c10d \
 --rdzv-endpoint="${master_addr}:${master_port}" \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 
 OMP_NUM_THREADS=12 torchrun \
@@ -237,7 +237,7 @@ OMP_NUM_THREADS=12 torchrun \
 --rdzv-endpoint="${master_addr}:${master_port}" \
 --rdzv-conf=is_host=$(if ((RANK)); then echo 0; else echo 1; fi) \
 --local_addr=${pod_hostname} \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 OMP_NUM_THREADS=12 torchrun \
 --nproc_per_node=${GPUS_PER_NODE} \
@@ -246,7 +246,7 @@ OMP_NUM_THREADS=12 torchrun \
 --rdzv_backend=c10d \
 --rdzv-endpoint="${master_addr}:${master_port}" \
 --rdzv-conf=is_host=$(if ((RANK)); then echo 0; else echo 1; fi) \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 OMP_NUM_THREADS=12 torchrun \
 --nproc_per_node=${GPUS_PER_NODE} \
@@ -254,7 +254,7 @@ OMP_NUM_THREADS=12 torchrun \
 --rdzv_id=101 \
 --rdzv_backend=c10d \
 --rdzv-endpoint="${master_addr}:${master_port}" \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 
 OMP_NUM_THREADS=12 torchrun \
@@ -263,7 +263,7 @@ OMP_NUM_THREADS=12 torchrun \
 --rdzv_id=101 \
 --rdzv_backend=c10d \
 --rdzv-endpoint="localhost:${master_port}" \
-hello_world.py
+/workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 # export NCCL_LIB_DIR=/usr/local/nvidia/lib64
 # export GPUS_PER_NODE=8
