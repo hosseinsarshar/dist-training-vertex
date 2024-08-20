@@ -105,5 +105,5 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
 
     # cd /workspace && rm -r dist-training-vertex && git clone https://github.com/hosseinsarshar/dist-training-vertex.git && cd dist-training-vertex && git checkout scaleout && cd ..
 
-chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh
+# chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh
 
