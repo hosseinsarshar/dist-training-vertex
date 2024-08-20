@@ -118,5 +118,3 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
 
     # +trainer.num_nodes="$NNODES" 
     # +exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" +exp_manager.exp_dir="/tmp/exp" ++model.micro_batch_size=1 ++trainer.max_steps=10 +model.data.data_prefix="[]"
-
-export DYNAMIC_ARGS='+trainer.num_nodes=${NNODES} +exp_manager.explicit_log_dir="/tmp/logs" +exp_manager.exp_dir="/tmp/exp" ++model.micro_batch_size=2 ++trainer.max_steps=100 +model.data.data_prefix="[path/to/data]"'
