@@ -99,4 +99,6 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     +exp_manager.exp_dir="/tmp/exp" \
     ++model.micro_batch_size=1 \
     ++trainer.max_steps=10 \
+    ++trainer.limit_val_batches=0.0 \
+    ++trainer.val_check_interval=300 \
     +model.data.data_prefix="[]"
