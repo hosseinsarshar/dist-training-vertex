@@ -203,6 +203,8 @@ model:
       constant_steps: 11873
       min_lr: 1.0e-05
   data:
+    mock: true
+    mock_dataset: true 
     data_impl: mmap
     splits_string: "90,8,2"
     seq_length: 8192
