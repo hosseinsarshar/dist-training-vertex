@@ -71,6 +71,7 @@ ls /usr/local/nccl-plugin/lib64 | sed 's/^/  /'
 # export TORCH_DISTRIBUTED_DEBUG=DETAIL
 # export TORCH_LOGS="+dynamo"
 # export TORCHDYNAMO_VERBOSE=1
+# export NCCL_DEBUG=INFO
 
 echo "Downloading GPT vocabulary files"
 wget https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-vocab.json &&\
@@ -118,3 +119,22 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
 
     # +trainer.num_nodes="$NNODES" 
     # +exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" +exp_manager.exp_dir="/tmp/exp" ++model.micro_batch_size=1 ++trainer.max_steps=10 +model.data.data_prefix="[]"
+
+    # cd /workspace && rm -r dist-training-vertex && git clone https://github.com/hosseinsarshar/dist-training-vertex.git && cd dist-training-vertex && git checkout single-bash && cd ..
+
+# cat dist-training-vertex/nemo/llama2-7b/job.sh
+
+# clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh
+
+# cat dist-training-vertex/nemo/llama2-7b/entry.sh
+
+
+# clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/entry.sh && ./dist-training-vertex/nemo/llama2-7b/entry.sh
+
+
+# /workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
+
+# ps aux | grep '[p]ython' | awk '{print $2}' | xargs -I {} kill -9 {}
+
+# nvitop
+
