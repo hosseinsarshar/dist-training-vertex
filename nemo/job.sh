@@ -84,9 +84,6 @@ mkdir -p /tmp/index_mapping_dir
 
 export GPUS_PER_NODE=8
 export WORLD_SIZE=$((NNODES * GPUS_PER_NODE))
-# export CONFIG_PATH="/workspace/dist-training-vertex/nemo/llama2-7b/"
-# export CONFIG_NAME="llama2-7b.yaml"
-# export ADDITIONAL_ARGS='+exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" +exp_manager.exp_dir="/tmp/exp" ++model.micro_batch_size=1 ++trainer.max_steps=2 +model.data.data_prefix="[]"'
 export DYNAMIC_ARGS="+trainer.num_nodes=${NNODES} ${ADDITIONAL_ARGS}"
 
 echo RANK:$RANK
@@ -118,31 +115,4 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     --config-path=$CONFIG_PATH \
     --config-name=$CONFIG_NAME \
     $DYNAMIC_ARGS
-
-    # +trainer.num_nodes="$NNODES" 
-    # +exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" +exp_manager.exp_dir="/tmp/exp" ++model.micro_batch_size=1 ++trainer.max_steps=10 +model.data.data_prefix="[]"
-
-    # cd /workspace && rm -r dist-training-vertex && git clone https://github.com/hosseinsarshar/dist-training-vertex.git && cd dist-training-vertex && git checkout single-bash && cd ..
-
-# cat dist-training-vertex/nemo/job.sh
-
-# clear && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh
-
-# cat dist-training-vertex/nemo/llama2-7b/entry.sh
-
-
-# clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/entry.sh && ./dist-training-vertex/nemo/llama2-7b/entry.sh
-
-
-# /workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
-
-# ps aux | grep '[p]ython' | awk '{print $2}' | xargs -I {} kill -9 {}
-
-# nvitop
-
-
-
-# export CONFIG_PATH="/workspace/dist-training-vertex/nemo/llama2-7b/"
-# export CONFIG_NAME="llama2-7b.yaml"
-# export ADDITIONAL_ARGS='+exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" +exp_manager.exp_dir="/tmp/exp" ++model.micro_batch_size=1 ++trainer.max_steps=2 +model.data.data_prefix="[]"'
 

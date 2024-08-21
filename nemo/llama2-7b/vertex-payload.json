@@ -29,6 +29,18 @@
               {
                 "name": "NNODES",
                 "value": "4"
+              },
+              {
+                "name": "CONFIG_PATH",
+                "value": "/workspace/dist-training-vertex/nemo/llama2-7b/"
+              },
+              {
+                "name": "CONFIG_NAME",
+                "value": "llama2-7b.yaml"
+              },
+              {
+                "name": "ADDITIONAL_ARGS",
+                "value": "+exp_manager.explicit_log_dir=\"/tmp/nemo-experiments/results\" +exp_manager.exp_dir=\"/tmp/exp\" ++model.micro_batch_size=1 ++trainer.max_steps=100 +model.data.data_prefix=\"[]\" ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
               }
             ]
           }
@@ -60,6 +72,18 @@
               {
                 "name": "NNODES",
                 "value": "4"
+              },
+              {
+                "name": "CONFIG_PATH",
+                "value": "/workspace/dist-training-vertex/nemo/llama2-7b/"
+              },
+              {
+                "name": "CONFIG_NAME",
+                "value": "llama2-7b.yaml"
+              },
+              {
+                "name": "ADDITIONAL_ARGS",
+                "value": "+exp_manager.explicit_log_dir=\"/tmp/nemo-experiments/results\" +exp_manager.exp_dir=\"/tmp/exp\" ++model.micro_batch_size=1 ++trainer.max_steps=100 +model.data.data_prefix=\"[]\" ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
               }
             ]
           }
@@ -68,3 +92,4 @@
       "enableWebAccess": true
     }
   }
+  
