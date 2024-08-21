@@ -8,6 +8,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Usage function to display help
+usage() {
+    echo "Usage: $0 --nnodes <NNODES> --config_path <CONFIG_PATH> --config_name <CONFIG_NAME> [other options...]"
+    echo
+    echo "Mandatory options:"
+    echo "  --nnodes <NNODES>                     Number of nodes (also sets +trainer.num_nodes)."
+    echo "  --config_path <CONFIG_PATH>           Path to config."
+    echo "  --config_name <CONFIG_NAME>           Name of config file such as 'llama2-7b.yaml'."
+    echo
+    echo "  Set ADDITIONAL_ARGS environment variable for hydra extra parameters."
+    echo
+    exit 1
+}
+
 # to view GPU activities on the web terminal
 pip install nvitop
 
@@ -53,11 +67,11 @@ echo "Contents of /usr/local/nccl-plugin/lib64:"
 ls /usr/local/nccl-plugin/lib64 | sed 's/^/  /'
 
 ## To turn on for debugging
-export TORCH_CPP_LOG_LEVEL=INFO # this is to turn on the verbose torch logs
-export TORCH_DISTRIBUTED_DEBUG=DETAIL
-export TORCH_LOGS="+dynamo"
-export TORCHDYNAMO_VERBOSE=1
-export NCCL_DEBUG=INFO
+# export TORCH_CPP_LOG_LEVEL=INFO # this is to turn on the verbose torch logs
+# export TORCH_DISTRIBUTED_DEBUG=DETAIL
+# export TORCH_LOGS="+dynamo"
+# export TORCHDYNAMO_VERBOSE=1
+# export NCCL_DEBUG=INFO
 
 echo "Downloading GPT vocabulary files"
 wget https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-vocab.json &&\
@@ -68,23 +82,28 @@ mkdir -p /tmp/exp/
 mkdir -p /tmp/nemo-experiments/results
 mkdir -p /tmp/index_mapping_dir
 
-echo "sleep for 10 seconds to let services boot up"
-sleep 10
-
-export NODE_RANK=$RANK         
 export GPUS_PER_NODE=8
 export WORLD_SIZE=$((NNODES * GPUS_PER_NODE))
-export MASTER_PORT=2222
-export GLOBAL_BATCH_SIZE=$((WORLD_SIZE*2))
+export DYNAMIC_ARGS="+trainer.num_nodes=${NNODES} ${ADDITIONAL_ARGS}"
 
 echo RANK:$RANK
-echo NODE_RANK:$NODE_RANK
 echo GPUS_PER_NODE:$GPUS_PER_NODE
 echo WORLD_SIZE:$WORLD_SIZE
 echo MASTER_PORT:$MASTER_PORT
 echo NNODES:$NNODES
+echo DYNAMIC_ARGS:$DYNAMIC_ARGS
+echo CONFIG_PATH:$CONFIG_PATH
+echo CONFIG_NAME:$CONFIG_NAME
 
-echo "Launching Torch distributed as node rank $NODE_RANK out of $NNODES nodes"
+if [ -z "$NNODES" ] || [ -z "$CONFIG_PATH" ] || [ -z "$CONFIG_NAME" ]; then
+    echo "Error: Missing mandatory arguments."
+    usage
+fi
+
+echo "sleep for 10 seconds to let services boot up"
+sleep 10
+
+echo "Launching Torch distributed as node rank $RANK out of $NNODES nodes"
 OMP_NUM_THREADS=12 RANK=$RANK HYDRA_FULL_ERROR=1 \
 torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     --nnodes=${NNODES} \
@@ -93,9 +112,7 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     --rdzv_id $CLOUD_ML_JOB_ID \
     --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT \
     /opt/NeMo/examples/nlp/language_modeling/megatron_gpt_pretraining.py \
-    --config-path="/workspace/dist-training-vertex/nemo/llama3-70b/" \
-    --config-name="llama3-70b.yaml" \
-    +trainer.num_nodes="$NNODES" \
-    +exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" \
-    +exp_manager.exp_dir="/tmp/exp" \
-    +model.data.data_prefix="[]"
+    --config-path=$CONFIG_PATH \
+    --config-name=$CONFIG_NAME \
+    $DYNAMIC_ARGS
+
