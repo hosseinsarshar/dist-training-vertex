@@ -53,10 +53,11 @@ echo "Contents of /usr/local/nccl-plugin/lib64:"
 ls /usr/local/nccl-plugin/lib64 | sed 's/^/  /'
 
 ## To turn on for debugging
-# export TORCH_CPP_LOG_LEVEL=INFO # this is to turn on the verbose torch logs
-# export TORCH_DISTRIBUTED_DEBUG=DETAIL
-# export TORCH_LOGS="+dynamo"
-# export TORCHDYNAMO_VERBOSE=1
+export TORCH_CPP_LOG_LEVEL=INFO # this is to turn on the verbose torch logs
+export TORCH_DISTRIBUTED_DEBUG=DETAIL
+export TORCH_LOGS="+dynamo"
+export TORCHDYNAMO_VERBOSE=1
+export NCCL_DEBUG=INFO
 
 echo "Downloading GPT vocabulary files"
 wget https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-vocab.json &&\
