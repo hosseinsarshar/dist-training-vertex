@@ -82,9 +82,6 @@ mkdir -p /tmp/exp/
 mkdir -p /tmp/nemo-experiments/results
 mkdir -p /tmp/index_mapping_dir
 
-echo "sleep for 10 seconds to let services boot up"
-sleep 10
-
 export GPUS_PER_NODE=8
 export WORLD_SIZE=$((NNODES * GPUS_PER_NODE))
 # export CONFIG_PATH="/workspace/dist-training-vertex/nemo/llama2-7b/"
@@ -98,11 +95,16 @@ echo WORLD_SIZE:$WORLD_SIZE
 echo MASTER_PORT:$MASTER_PORT
 echo NNODES:$NNODES
 echo DYNAMIC_ARGS:$DYNAMIC_ARGS
+echo CONFIG_PATH:$CONFIG_PATH
+echo CONFIG_NAME:$CONFIG_NAME
 
 if [ -z "$NNODES" ] || [ -z "$CONFIG_PATH" ] || [ -z "$CONFIG_NAME" ]; then
     echo "Error: Missing mandatory arguments."
     usage
 fi
+
+echo "sleep for 10 seconds to let services boot up"
+sleep 10
 
 echo "Launching Torch distributed as node rank $RANK out of $NNODES nodes"
 OMP_NUM_THREADS=12 RANK=$RANK HYDRA_FULL_ERROR=1 \
@@ -122,9 +124,9 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
 
     # cd /workspace && rm -r dist-training-vertex && git clone https://github.com/hosseinsarshar/dist-training-vertex.git && cd dist-training-vertex && git checkout single-bash && cd ..
 
-# cat dist-training-vertex/nemo/llama2-7b/job.sh
+# cat dist-training-vertex/nemo/job.sh
 
-# clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh
+# clear && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh
 
 # cat dist-training-vertex/nemo/llama2-7b/entry.sh
 
@@ -137,4 +139,10 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
 # ps aux | grep '[p]ython' | awk '{print $2}' | xargs -I {} kill -9 {}
 
 # nvitop
+
+
+
+# export CONFIG_PATH="/workspace/dist-training-vertex/nemo/llama2-7b/"
+# export CONFIG_NAME="llama2-7b.yaml"
+# export ADDITIONAL_ARGS='+exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" +exp_manager.exp_dir="/tmp/exp" ++model.micro_batch_size=1 ++trainer.max_steps=2 +model.data.data_prefix="[]"'
 
