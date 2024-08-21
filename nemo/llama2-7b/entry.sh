@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# export NCCL_LIB_DIR=/usr/local/nvidia/lib64
+# export GPUS_PER_NODE=8
+# export NCCL_DEBUG=VERSION
+# export JOB_ID=nemo-llama3-70b-64g-202408070414
+# export OUTPUT_GCS_PATH_PREFIX=gs://jk-vertex-staging-us-east4/nemo_jobs
+# export GCS_DATA_SOURCE=gs://nemo-megatron-demo/training-data/tokenized/bpe2gpt/wikipedia
+# export DATA_PREFIX=wikipedia-tokenized-for-gpt2
+# export CONFIG_NAME=llama3-70b.yaml
+# export TORCH_DISTRIBUTED_TARGET=/opt/NeMo/examples/nlp/language_modeling/megatron_gpt_pretraining.py
+
+
 echo "Running on a host: $(hostname)"
 
 : "${GPUS_PER_NODE:?Must set GPUS_PER_NODE}"

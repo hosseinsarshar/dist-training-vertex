@@ -53,6 +53,7 @@ echo "Contents of /usr/local/nccl-plugin/lib64:"
 ls /usr/local/nccl-plugin/lib64 | sed 's/^/  /'
 
 ## To turn on for debugging
+# export NCCL_DEBUG=INFO
 # export TORCH_CPP_LOG_LEVEL=INFO # this is to turn on the verbose torch logs
 # export TORCH_DISTRIBUTED_DEBUG=DETAIL
 # export TORCH_LOGS="+dynamo"
@@ -109,10 +110,16 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
 
 # clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh
 
-# clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh
+# cat dist-training-vertex/nemo/llama2-7b/entry.sh
 
+
+# clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/entry.sh && ./dist-training-vertex/nemo/llama2-7b/entry.sh
+
+
+# /workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
 
 # ps aux | grep '[p]ython' | awk '{print $2}' | xargs -I {} kill -9 {}
 
 # nvitop
+
 
