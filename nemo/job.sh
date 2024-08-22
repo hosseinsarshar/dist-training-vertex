@@ -110,11 +110,4 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     --config-name=$CONFIG_NAME \
     $DYNAMIC_ARGS
 
-
-# export ADDITIONAL_ARGS="++model.micro_batch_size=1 ++trainer.max_steps=10 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
-# export CONFIG_PATH="/workspace/dist-training-vertex/nemo/llama2-7b/"
-# export CONFIG_NAME="llama2-7b.yaml"
-# export LOG_DIR="/gcs/hosseins-vertex-training-dlexamples"
-# export NNODES=2
-
-
+echo "Training completed on node rank $RANK out of $NNODES nodes"
