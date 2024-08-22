@@ -1,5 +1,5 @@
-# Distributed Training on A3-Mega (H100x8) with Vertex
-This repo provides examples on how to launch distributed training on A3-Mega (H100x8) on Vertex
+# Multi-node Pre-training, Continued pre-training and supervised fine-tuning on A3-Mega (H100x8) with Vertex
+This repo provides examples on how to launch multi-node distributed training on A3-Mega (H100x8) on Vertex
 
 This repo contains:
 
@@ -37,6 +37,12 @@ curl -X POST \
      -d @nemo/llama3-70b/vertex-payload.json \
      "https://<reigon>-aiplatform.googleapis.com/v1/projects/<project-id>/locations/<reigon>/customJobs"
 ```
+## 1.3 - Continual Pretraining with llama3-70B with Nemo (Pytorch)
+- checkpoint conversion
+- import checkpoint
+- continue pretraining
+
+## 1.4 - Full Supervised Fine-tuning with llama3-70B with Nemo (Pyotch)
 
 ## 2- Stable Diffusion Diffusers with WebDataset (Pytorch)
 *Coming soon*
