@@ -17,7 +17,7 @@ CONFIG_NAME="llama2-7b.yaml"
 ADDITIONAL_ARGS="++model.micro_batch_size=1 ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
 export LOG_DIR="/gcs/<bucket-name>/llama2-7b-pretraining"
 ```
-The right parameters are set in both payloads json files: [Llama2-7B](nemo/llama2-7b/vertex-payload.json) and [Llama3-70B](nemo/llama3-70b/vertex-payload.json).
+The right parameters are set in both json payload files: [Llama2-7B](nemo/llama2-7b/vertex-payload.json) and [Llama3-70B](nemo/llama3-70b/vertex-payload.json).
 - **Submit the job**: Use the following curl command to kick off the job on Vertex:
 
 ```

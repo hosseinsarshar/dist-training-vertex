@@ -41,7 +41,7 @@
               },
               {
                 "name": "NNODES",
-                "value": "8"
+                "value": "4"
               }
             ]
           }
@@ -84,7 +84,7 @@
               },
               {
                 "name": "NNODES",
-                "value": "8"
+                "value": "4"
               }
             ]
           }
