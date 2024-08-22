@@ -1,3 +1,4 @@
+
 {
     "displayName": "nemo_llama2_7b",
     "jobSpec": {
@@ -19,7 +20,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
             ],
             "env": [
               {
@@ -62,7 +63,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
             ],
             "env": [
               {
