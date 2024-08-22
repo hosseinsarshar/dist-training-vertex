@@ -10,12 +10,13 @@
 
 # Usage function to display help
 usage() {
-    echo "Usage: $0 --nnodes <NNODES> --config_path <CONFIG_PATH> --config_name <CONFIG_NAME> [other options...]"
+    echo "Usage: $0 --nnodes <NNODES> --config_path <CONFIG_PATH> --config_name <CONFIG_NAME> --log_bucket_dir <LOG_DIR>  [other options...]"
     echo
     echo "Mandatory options:"
     echo "  --nnodes <NNODES>                     Number of nodes (also sets +trainer.num_nodes)."
     echo "  --config_path <CONFIG_PATH>           Path to config."
     echo "  --config_name <CONFIG_NAME>           Name of config file such as 'llama2-7b.yaml'."
+    echo "  --log_dir <LOG_DIR>                   Relative or absolute path to the log directory - such as /tmp/ or /gcs/<bucket-name>"
     echo
     echo "  Set ADDITIONAL_ARGS environment variable for hydra extra parameters."
     echo
@@ -51,20 +52,12 @@ export NCCL_FASTRAK_PLUGIN_ACCEPT_TIMEOUT_MS=600000
 export NCCL_NVLS_ENABLE=0
 export LD_LIBRARY_PATH=${NCCL_LIB_DIR}:${LD_LIBRARY_PATH}
 
-
-# /usr/local/nvidia/lib64:/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/tensorrt/lib
-# export LD_LIBRARY_PATH="/usr/local/nccl-plugin/lib64:/usr/local/cuda/targets/x86_64-linux/lib/:/usr/local/nvidia/lib64"
-# export LIBRARY_PATH="/usr/local/cuda/lib64/stubs" 
-
 export LD_LIBRARY_PATH="/usr/local/nccl-plugin/lib64:/usr/local/nvidia/lib64/:${LD_LIBRARY_PATH}"
 echo "Warning: Set LD_LIBRARY_PATH=$LD_LIBRARY_PATH to override the NCCL library"
 
 ldconfig /usr/local/nvidia/lib64/
 echo "Added /usr/local/nvidia/lib64/ to ldconfig:"
 ldconfig -p | grep libcuda | sed 's/^/  /'
-
-echo "Contents of /usr/local/nccl-plugin/lib64:"
-ls /usr/local/nccl-plugin/lib64 | sed 's/^/  /'
 
 ## To turn on for debugging
 # export TORCH_CPP_LOG_LEVEL=INFO # this is to turn on the verbose torch logs
@@ -77,14 +70,14 @@ echo "Downloading GPT vocabulary files"
 wget https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-vocab.json &&\
 wget https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-merges.txt
 
-mkdir -p /tmp/logs/
-mkdir -p /tmp/exp/
-mkdir -p /tmp/nemo-experiments/results
-mkdir -p /tmp/index_mapping_dir
+mkdir -p ${LOG_DIR}/logs/
+mkdir -p ${LOG_DIR}/exp/
+mkdir -p ${LOG_DIR}/nemo-experiments/results
+mkdir -p ${LOG_DIR}/index_mapping_dir
 
 export GPUS_PER_NODE=8
 export WORLD_SIZE=$((NNODES * GPUS_PER_NODE))
-export DYNAMIC_ARGS="+trainer.num_nodes=${NNODES} ${ADDITIONAL_ARGS}"
+export DYNAMIC_ARGS="+trainer.num_nodes=${NNODES} +exp_manager.explicit_log_dir=\"${LOG_DIR}/nemo-experiments/results\" +model.data.data_prefix=\"[]\" +exp_manager.exp_dir=\"${LOG_DIR}/exp/\" ${ADDITIONAL_ARGS}"
 
 echo RANK:$RANK
 echo GPUS_PER_NODE:$GPUS_PER_NODE
@@ -94,8 +87,9 @@ echo NNODES:$NNODES
 echo DYNAMIC_ARGS:$DYNAMIC_ARGS
 echo CONFIG_PATH:$CONFIG_PATH
 echo CONFIG_NAME:$CONFIG_NAME
+echo LOG_DIR:$LOG_DIR
 
-if [ -z "$NNODES" ] || [ -z "$CONFIG_PATH" ] || [ -z "$CONFIG_NAME" ]; then
+if [ -z "$NNODES" ] || [ -z "$CONFIG_PATH" ] || [ -z "$CONFIG_NAME" ] || [ -z "$LOG_DIR" ]; then
     echo "Error: Missing mandatory arguments."
     usage
 fi
@@ -116,3 +110,4 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     --config-name=$CONFIG_NAME \
     $DYNAMIC_ARGS
 
+echo "Training completed on node rank $RANK out of $NNODES nodes"

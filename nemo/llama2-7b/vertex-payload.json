@@ -1,5 +1,6 @@
+
 {
-    "displayName": "nemo_llama2_7b",
+    "displayName": "nemo_llama2_7b_4_nodes",
     "jobSpec": {
       "workerPoolSpecs": [
         {   
@@ -19,16 +20,12 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
             ],
             "env": [
               {
-                "name": "LD_LIBRARY_PATH",
-                "value": "/usr/local/nvidia/lib64"
-              },
-              {
-                "name": "NNODES",
-                "value": "4"
+                "name": "ADDITIONAL_ARGS",
+                "value": "++trainer.max_steps=10 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
               },
               {
                 "name": "CONFIG_PATH",
@@ -39,8 +36,12 @@
                 "value": "llama2-7b.yaml"
               },
               {
-                "name": "ADDITIONAL_ARGS",
-                "value": "+exp_manager.explicit_log_dir=\"/tmp/nemo-experiments/results\" +exp_manager.exp_dir=\"/tmp/exp\" ++model.micro_batch_size=1 ++trainer.max_steps=100 +model.data.data_prefix=\"[]\" ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+                "name": "LOG_DIR",
+                "value": "/gcs/hosseins-vertex-training-dlexamples"
+              },
+              {
+                "name": "NNODES",
+                "value": "8"
               }
             ]
           }
@@ -62,16 +63,12 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/llama2-7b/job.sh && ./dist-training-vertex/nemo/llama2-7b/job.sh"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
             ],
             "env": [
               {
-                "name": "LD_LIBRARY_PATH",
-                "value": "/usr/local/nvidia/lib64"
-              },
-              {
-                "name": "NNODES",
-                "value": "4"
+                "name": "ADDITIONAL_ARGS",
+                "value": "++trainer.max_steps=10 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
               },
               {
                 "name": "CONFIG_PATH",
@@ -82,8 +79,12 @@
                 "value": "llama2-7b.yaml"
               },
               {
-                "name": "ADDITIONAL_ARGS",
-                "value": "+exp_manager.explicit_log_dir=\"/tmp/nemo-experiments/results\" +exp_manager.exp_dir=\"/tmp/exp\" ++model.micro_batch_size=1 ++trainer.max_steps=100 +model.data.data_prefix=\"[]\" ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+                "name": "LOG_DIR",
+                "value": "/gcs/hosseins-vertex-training-dlexamples"
+              },
+              {
+                "name": "NNODES",
+                "value": "8"
               }
             ]
           }
