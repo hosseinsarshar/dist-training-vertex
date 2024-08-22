@@ -94,14 +94,14 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT \
     /opt/NeMo/examples/nlp/language_modeling/megatron_gpt_pretraining.py \
     --config-path="/workspace/dist-training-vertex/nemo/llama2-7b/" \
-    --config-name="suf-llama3-70b.yaml" \
+    --config-name="llama3-70b.yaml" \
     +trainer.num_nodes="$NNODES" \
     +exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" \
     +exp_manager.exp_dir="/tmp/exp" \
     ++model.micro_batch_size=1 \
     ++trainer.max_steps=10 \
     ++trainer.limit_val_batches=0.0 \
-    ++trainer.val_check_interval=300 \
+    ++trainer.val_check_interval=1 \
     +model.data.data_prefix="[]"
 
     # cd /workspace && rm -r dist-training-vertex && git clone https://github.com/hosseinsarshar/dist-training-vertex.git && cd dist-training-vertex && git checkout scaleout && cd ..

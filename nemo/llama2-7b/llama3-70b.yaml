@@ -159,13 +159,13 @@ model:
     mock: true
     mock_dataset: true 
     data_impl: mock                                                             
-    splits_string: "90,8,2"                                                  
-    seq_length: 4096
-    skip_warmup: true                                                           
-    num_workers: 4                                                              
+    splits_string: "90,8,2"
+    seq_length: 8192
+    skip_warmup: true
+    num_workers: 2
     exchange_indices_distributed: true
-    dataloader_type: single  # cyclic                                           
-    reset_position_ids: false  # Reset position ids after end-of-document token 
-    reset_attention_mask: false  # Reset attention mask after end-of-document token
-    eod_mask_loss: false  # Mask loss for the end of document tokens            
-    index_mapping_dir: null  # path to save index mapping .npy files, by default will save in the same location as data_prefix
+    dataloader_type: single
+    reset_position_ids: false
+    reset_attention_mask: false
+    eod_mask_loss: false
+    index_mapping_dir: null

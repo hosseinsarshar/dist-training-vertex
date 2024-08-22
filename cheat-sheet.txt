@@ -1,0 +1,24 @@
+# export CONFIG_PATH="/workspace/dist-training-vertex/nemo/llama2-7b/"
+# export CONFIG_NAME="llama2-7b.yaml"
+# export ADDITIONAL_ARGS='+exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" +exp_manager.exp_dir="/tmp/exp" ++model.micro_batch_size=1 ++trainer.max_steps=4 +model.data.data_prefix="[]" ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1 ++model.micro_batch_size=2'
+
+# +trainer.num_nodes="$NNODES" 
+    # +exp_manager.explicit_log_dir="/tmp/nemo-experiments/results" +exp_manager.exp_dir="/tmp/exp" ++model.micro_batch_size=1 ++trainer.max_steps=10 +model.data.data_prefix="[]"
+
+    # cd /workspace && rm -r dist-training-vertex && git clone https://github.com/hosseinsarshar/dist-training-vertex.git && cd dist-training-vertex && git checkout single-bash && cd ..
+
+# cat dist-training-vertex/nemo/job.sh
+
+# clear && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh
+
+# cat dist-training-vertex/nemo/llama2-7b/entry.sh
+
+
+# clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/entry.sh && ./dist-training-vertex/nemo/llama2-7b/entry.sh
+
+
+# /workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
+
+# ps aux | grep '[p]ython' | awk '{print $2}' | xargs -I {} kill -9 {}
+
+# nvitop
