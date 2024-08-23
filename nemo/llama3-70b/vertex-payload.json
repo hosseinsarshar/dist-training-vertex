@@ -19,7 +19,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
+              "git clone -b llama-bench https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
             ],
             "env": [
               {
@@ -36,7 +36,7 @@
               },
               {
                 "name": "LOG_DIR",
-                "value": "/gcs/hosseins-vertex-training-dlexamples"
+                "value": "/tmp/training"
               },
               {
                 "name": "NNODES",
@@ -51,7 +51,7 @@
             "acceleratorType": "NVIDIA_H100_MEGA_80GB",
             "acceleratorCount": 8
           },
-          "replicaCount": "3",
+          "replicaCount": "8",
           "diskSpec": {
             "bootDiskType": "pd-ssd",
             "bootDiskSizeGb": 100
@@ -62,7 +62,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
+              "git clone -b llama-bench https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
             ],
             "env": [
               {
@@ -79,7 +79,7 @@
               },
               {
                 "name": "LOG_DIR",
-                "value": "/gcs/hosseins-vertex-training-dlexamples"
+                "value": "/tmp/training"
               },
               {
                 "name": "NNODES",
