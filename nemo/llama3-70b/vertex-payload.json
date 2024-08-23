@@ -24,7 +24,7 @@
             "env": [
               {
                 "name": "ADDITIONAL_ARGS",
-                "value": "++model.micro_batch_size=1 ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+                "value": "++model.micro_batch_size=1 ++trainer.max_steps=10 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
               },
               {
                 "name": "CONFIG_PATH",
@@ -67,7 +67,7 @@
             "env": [
               {
                 "name": "ADDITIONAL_ARGS",
-                "value": "++model.micro_batch_size=1 ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+                "value": "++model.micro_batch_size=1 ++trainer.max_steps=10 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
               },
               {
                 "name": "CONFIG_PATH",
