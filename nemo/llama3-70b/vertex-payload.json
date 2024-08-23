@@ -51,7 +51,7 @@
             "acceleratorType": "NVIDIA_H100_MEGA_80GB",
             "acceleratorCount": 8
           },
-          "replicaCount": "8",
+          "replicaCount": "7",
           "diskSpec": {
             "bootDiskType": "pd-ssd",
             "bootDiskSizeGb": 100
