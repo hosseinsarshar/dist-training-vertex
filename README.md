@@ -9,13 +9,13 @@ To submit the job:
 
 ```git clone -b llama-bench https://github.com/hosseinsarshar/dist-training-vertex.git```
 
-- **Run this command**: Use the following curl command to kick off the job on Vertex (**make sure to set the region and project-id**):
+- **Run this command**: Use the following curl command to kick off the job on Vertex (**make sure to set the `region` and `project-id`**):
 
 ```
 curl -X POST \
      -H "Authorization: Bearer $(gcloud auth print-access-token)" \
      -H "Content-Type: application/json; charset=utf-8" \
-     -d @nemo/llama3-70b/vertex-payload.json \
+     -d @dist-training-vertex/nemo/llama3-70b/vertex-payload.json \
      "https://<reigon>-aiplatform.googleapis.com/v1/projects/<project-id>/locations/<reigon>/customJobs"
 ```
 
