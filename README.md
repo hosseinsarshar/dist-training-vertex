@@ -6,7 +6,7 @@ This repo provides an example on how to launch multi-node distributed training o
 
 To submit the job:
 - **Clone the repo**:
-git clone -b llama-bench https://github.com/hosseinsarshar/dist-training-vertex.git
+`git clone -b llama-bench https://github.com/hosseinsarshar/dist-training-vertex.git`
 
 cd dist-training-vertex
 - **Run this command**: Use the following curl command to kick off the job on Vertex:
