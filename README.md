@@ -19,7 +19,13 @@ curl -X POST \
      "https://<reigon>-aiplatform.googleapis.com/v1/projects/<project-id>/locations/<reigon>/customJobs"
 ```
 
-To  like to make any modifications:
+You should expect the following output from `RANK=0` (`workerpool0-0`) for `10 steps`:
+
+```
+Epoch 0: : 100%|██████████| 10/10 [25:24<00:00, v_num=None, reduced_train_loss=4.210, global_step=9.000, consumed_samples=10240.0, train_step_timing in s=138.0]\rEpoch 0: : 100%|██████████| 10/10 [25:24<00:00, v_num=None, reduced_train_loss=4.210, global_step=9.000, consumed_samples=10240.0, train_step_timing in s=138.0]
+```
+
+If you like to modify the details:
 
 - **Dockerfile**: using the provided [Dockerfile](nemo/Dockerfile), build an image from [NVIDIA Nemo image](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/nemo/tags). You can also use the image provided in the vertex-payload.json file - it's publicly accessible (`classicboyir/nemo:02`).
 - **Nemo Config**: Use the [llama3-70b.yaml](nemo/llama3-70b/llama3-70b.yaml) Nemo config file as the reference - you can either use it as is or modify it to your liking.
