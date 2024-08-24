@@ -29,7 +29,7 @@
               },
               {
                 "name": "CONFIG_PATH",
-                "value": "/workspace/dist-training-vertex/pretaining/nemo/llama2-7b/"
+                "value": "/workspace/dist-training-vertex/pretraining/nemo/llama2-7b/"
               },
               {
                 "name": "CONFIG_NAME",
@@ -72,7 +72,7 @@
               },
               {
                 "name": "CONFIG_PATH",
-                "value": "/workspace/dist-training-vertex/pretaining/nemo/llama2-7b/"
+                "value": "/workspace/dist-training-vertex/pretraining/nemo/llama2-7b/"
               },
               {
                 "name": "CONFIG_NAME",
