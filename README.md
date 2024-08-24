@@ -1,7 +1,5 @@
 # Multi-node Pre-training, Continued pre-training and supervised fine-tuning on A3-Mega (H100x8) with Vertex
 This repo provides examples on how to launch multi-node distributed training on A3-Mega (H100x8) on Vertex
-# Multi-node Pre-training, Continued pre-training and supervised fine-tuning on A3-Mega (H100x8) with Vertex
-This repo provides examples on how to launch multi-node distributed training on A3-Mega (H100x8) on Vertex
 
 This repo contains:
 
@@ -41,12 +39,6 @@ curl -X POST \
 ```
 ## 1.3 - Continual Pretraining with llama3-70B with Nemo (Pytorch)
 - checkpoint conversion
-- import checkpoint
-- continue pretraining
-
-## 1.4 - Full Supervised Fine-tuning with llama3-70B with Nemo (Pyotch)
-## 1.3 - Continual Pretraining with llama3-70B with Nemo (Pytorch)
-- checkpoint conversion
 
 python /opt/NeMo/scripts/checkpoint_converters/convert_llama_hf_to_nemo.py --input_name_or_path /path/to/hf/checkpoint --output_path /local/directory   
 
@@ -57,8 +49,8 @@ In llamax-xxb.yaml file, update restore_from_ckpt: /path/to/nemo-checkpoint
 - continue pretraining in the same way as 1.2
 
 Note: you may want to enable checkpointing in the configuration file as well.
-
 ## 1.4 - Full Supervised Fine-tuning with llama3-70B with Nemo (Pyotch)
+
 
 ## 2- Stable Diffusion Diffusers with WebDataset (Pytorch)
 *Coming soon*

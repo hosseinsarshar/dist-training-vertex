@@ -1,5 +1,6 @@
+
 {
-    "displayName": "nemo_llama3_70b_8_nodes",
+    "displayName": "nemo_llama2_7b_4_nodes",
     "jobSpec": {
       "workerPoolSpecs": [
         {   
@@ -19,20 +20,20 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && sleep infinity"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
             ],
             "env": [
               {
                 "name": "ADDITIONAL_ARGS",
-                "value": "++model.micro_batch_size=1 ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+                "value": "++trainer.max_steps=10 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
               },
               {
                 "name": "CONFIG_PATH",
-                "value": "/workspace/dist-training-vertex/nemo/llama3-70b/"
+                "value": "/workspace/dist-training-vertex/pretaining/nemo/llama2-7b/"
               },
               {
                 "name": "CONFIG_NAME",
-                "value": "llama3-70b.yaml"
+                "value": "llama2-7b.yaml"
               },
               {
                 "name": "LOG_DIR",
@@ -40,7 +41,7 @@
               },
               {
                 "name": "NNODES",
-                "value": "8"
+                "value": "4"
               }
             ]
           }
@@ -51,7 +52,7 @@
             "acceleratorType": "NVIDIA_H100_MEGA_80GB",
             "acceleratorCount": 8
           },
-          "replicaCount": "7",
+          "replicaCount": "3",
           "diskSpec": {
             "bootDiskType": "pd-ssd",
             "bootDiskSizeGb": 100
@@ -62,20 +63,20 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && sleep infinity"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
             ],
             "env": [
               {
                 "name": "ADDITIONAL_ARGS",
-                "value": "++model.micro_batch_size=1 ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+                "value": "++trainer.max_steps=10 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
               },
               {
                 "name": "CONFIG_PATH",
-                "value": "/workspace/dist-training-vertex/nemo/llama3-70b/"
+                "value": "/workspace/dist-training-vertex/pretaining/nemo/llama2-7b/"
               },
               {
                 "name": "CONFIG_NAME",
-                "value": "llama3-70b.yaml"
+                "value": "llama2-7b.yaml"
               },
               {
                 "name": "LOG_DIR",
@@ -83,7 +84,7 @@
               },
               {
                 "name": "NNODES",
-                "value": "8"
+                "value": "4"
               }
             ]
           }
@@ -92,3 +93,4 @@
       "enableWebAccess": true
     }
   }
+  
