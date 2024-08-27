@@ -111,3 +111,24 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     $DYNAMIC_ARGS
 
 echo "Training completed on node rank $RANK out of $NNODES nodes"
+
+export ADDITIONAL_ARGS="++model.micro_batch_size=1 ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+export CONFIG_PATH="/workspace/dist-training-vertex/nemo/mixtral-8x7b/"
+export CONFIG_NAME="mixtral-8x7b.yaml"
+export LOG_DIR="/gcs/hosseins-vertex-training-dlexamples"
+export NNODES=8
+
+# clear && cd /workspace && rm -r dist-training-vertex && git clone https://github.com/hosseinsarshar/dist-training-vertex.git && cd dist-training-vertex && git checkout mixtral && cd ..
+
+# cat dist-training-vertex/nemo/job.sh
+# ls dist-training-vertex/nemo/
+
+# export ADDITIONAL_ARGS="++model.micro_batch_size=1 ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+# clear && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh
+
+# cat dist-training-vertex/nemo/llama2-7b/entry.sh
+# clear && chmod +x ./dist-training-vertex/nemo/llama2-7b/entry.sh && ./dist-training-vertex/nemo/llama2-7b/entry.sh
+# /workspace/dist-training-vertex/nemo/llama2-7b/hello_world.py
+# ps aux | grep '[p]ython' | awk '{print $2}' | xargs -I {} kill -9 {}
+
+# nvitop
