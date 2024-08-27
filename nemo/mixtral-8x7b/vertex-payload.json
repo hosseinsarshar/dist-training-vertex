@@ -1,5 +1,5 @@
 {
-    "displayName": "nemo_llama3_70b_8_nodes",
+    "displayName": "nemo_mixtral-8x7b_8_nodes",
     "jobSpec": {
       "workerPoolSpecs": [
         {   
