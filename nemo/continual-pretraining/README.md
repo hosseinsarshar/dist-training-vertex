@@ -12,3 +12,4 @@ In **vertex-payload.json file, overwrite the `restore_from_ckpt` parameter by ad
 Note: you may want to enable checkpointing in the configuration file as well.
 
 For similar way to convert llama3 model: [here](https://docs.nvidia.com/nemo-framework/user-guide/latest/llms/starcoder2/checkpointconversion.html)
+
