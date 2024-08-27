@@ -163,9 +163,15 @@ model:
   ddp_overlap: False # True for using PyTorch DDP overlap.
 
   optim:
-    name: fused_adam
-    lr: null
-    weight_decay: 0.
+    name: distributed_fused_adam
+    lr: 0.0001
+    weight_decay: 0.1
+    grad_sync_dtype: bf16
+    overlap_grad_sync: true
+    bucket_cap_mb: 400
+    overlap_param_sync: true
+    contiguous_grad_buffer: true
+    contiguous_param_buffer: true
     betas:
       - 0.9
       - 0.999
@@ -184,7 +190,7 @@ model:
 
   data:
       num_workers: 16
-      synthetic_data: False # dataset_path and local_root_path can be empty when using synthetic data
+      synthetic_data: True # dataset_path and local_root_path can be empty when using synthetic data
       synthetic_data_length: 10000
       train:
           dataset_path:

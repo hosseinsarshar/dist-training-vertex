@@ -9,6 +9,10 @@
 # limitations under the License.
 
 # Usage function to display help
+: "${GPUS_PER_NODE:?Must set GPUS_PER_NODE}"
+
+
+
 usage() {
     echo "Usage: $0 --nnodes <NNODES> --config_path <CONFIG_PATH> --config_name <CONFIG_NAME> --log_bucket_dir <LOG_DIR>  [other options...]"
     echo
