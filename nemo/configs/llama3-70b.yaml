@@ -111,7 +111,7 @@ model:
   bias_dropout_add_fusion: true
   masked_softmax_fusion: true
   seed: 1234
-  resume_from_checkpoint: null
+  resume_from_checkpoint: null 
   use_cpu_initialization: false
   onnx_safe: false
   apex_transformer_log_level: 30
