@@ -32,7 +32,7 @@
               },
               {
                 "name": "CONFIG_NAME",
-                "value": "$MODEL_NAME.json"
+                "value": "$MODEL_NAME.yaml"
               },
               {
                 "name": "LOG_DIR",
