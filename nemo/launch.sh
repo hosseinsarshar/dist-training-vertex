@@ -22,7 +22,7 @@ export TRAIN_TYPE=$1
 export MODEL_NAME=$2
 export LOG_DIR=$3
 
-if [ $4 = "--debug" ]; then
+if [ -z $4 ]; then
     export DEBUG=$4
 fi
 
