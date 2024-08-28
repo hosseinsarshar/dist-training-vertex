@@ -63,7 +63,6 @@ if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; th
     export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
     export TRANSFER_MODEL_CMD="gsutil -m cp $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
     export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
-    # TODO: split launch_cmd into chief and workers as to onl
 fi
 
 # if in debug mode add sleep infinity to launch command
