@@ -22,7 +22,7 @@ export TRAIN_TYPE=$1
 export MODEL_NAME=$2
 export LOG_DIR=$3
 
-if [ $4="--debug" ]; then
+if [ $4 = "--debug" ]; then
     export DEBUG=$4
 fi
 
@@ -75,6 +75,6 @@ json_job=$(envsubst < vertex-payload.json)
 curl -X POST \
      -H "Authorization: Bearer $(gcloud auth print-access-token)" \
      -H "Content-Type: application/json; charset=utf-8" \
-     -d $json_job \
+     -d $json_jo \
      "https://$REGION-aiplatform.googleapis.com/v1/projects/$PROJECT_ID/locations/$REGION/customJobs"
 
