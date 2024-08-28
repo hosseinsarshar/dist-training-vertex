@@ -22,7 +22,9 @@ export TRAIN_TYPE=$1
 export MODEL_NAME=$2
 export LOG_DIR=$3
 
-if [ -z $4 ]; then
+if [ -z "$4" ]; then
+    echo "Debug mode is disabled. Will not append sleep infinity."
+else
     export DEBUG=$4
 fi
 
@@ -34,25 +36,6 @@ echo DEBUG:$DEBUG
 if [ -z "$TRAIN_TYPE" ] || [ -z "$MODEL_NAME" ] || [ -z "$LOG_DIR" ]; then
     echo "Error: Missing mandatory arguments."
     usage
-fi
-
-# == construct job launch command == 
-
-# create base job launch command 
-export LAUNCH_CMD="git clone https://github.com/hosseinsarshar/dist-training-vertex.git &&"
-
-# add checkpoint transfer to launch command # NOTE: set BUCKET env var before calling launch.sh
-if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; then
-    export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
-    export LAUNCH_CMD="$LAUNCH_CMD gsutil -m cp $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
-    export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
-fi
-
-# if in debug mode add sleep infinity to launch command
-if [ -z "$DEBUG" ]; then
-    export LAUNCH_CMD="$LAUNCH_CMD chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
-else 
-    export LAUNCH_CMD="$LAUNCH_CMD sleep infinity"
 fi
 
 # == set job specific parameters based on model ==
@@ -68,6 +51,26 @@ export REPLICA_COUNT=$(($NNODES-1))
 
 # == define additional args ==
 export ADDITIONAL_ARGS="++model.micro_batch_size=$MICRO_BATCH ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+
+# == construct job launch command == 
+
+# create base job launch command 
+export LAUNCH_CMD="git clone https://github.com/hosseinsarshar/dist-training-vertex.git &&"
+
+# add checkpoint transfer to launch command # NOTE: set BUCKET env var before calling launch.sh
+if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; then
+    echo "Transferring nemo checkpoint file"
+    export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
+    export LAUNCH_CMD="$LAUNCH_CMD gsutil -m cp $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
+    export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
+fi
+
+# if in debug mode add sleep infinity to launch command
+if [ -z "$DEBUG" ]; then
+    export LAUNCH_CMD="$LAUNCH_CMD chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
+else 
+    export LAUNCH_CMD="$LAUNCH_CMD sleep infinity"
+fi
 
 # == create json stucture with existing environment variables ==
 json_job=$(envsubst < vertex-payload.json)
