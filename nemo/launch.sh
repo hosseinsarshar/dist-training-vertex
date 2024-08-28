@@ -61,8 +61,9 @@ export LAUNCH_CMD="git clone https://github.com/hosseinsarshar/dist-training-ver
 if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; then
     echo "Transferring nemo checkpoint file"
     export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
-    export LAUNCH_CMD="$LAUNCH_CMD gsutil -m cp $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
+    export TRANSFER_MODEL_CMD="gsutil -m cp $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
     export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
+    # TODO: split launch_cmd into chief and workers as to onl
 fi
 
 # if in debug mode add sleep infinity to launch command
