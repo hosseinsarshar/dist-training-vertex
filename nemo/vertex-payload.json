@@ -19,7 +19,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && $LAUNCH_CMD"
+              "$LAUNCH_CMD"
             ],
             "env": [
               {
@@ -62,7 +62,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && $LAUNCH_CMD"
+              "$LAUNCH_CMD"
             ],
             "env": [
               {

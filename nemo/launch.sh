@@ -42,7 +42,7 @@ fi
 export LAUNCH_CMD="git clone https://github.com/hosseinsarshar/dist-training-vertex.git &&"
 
 # add checkpoint transfer to launch command # NOTE: set BUCKET env var before calling launch.sh
-if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "continual-pretraining" ]; then
+if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; then
     export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
     export LAUNCH_CMD="$LAUNCH_CMD gsutil -m cp $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
     export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
@@ -72,9 +72,23 @@ export ADDITIONAL_ARGS="++model.micro_batch_size=$MICRO_BATCH ++trainer.max_step
 # == create json stucture with existing environment variables ==
 json_job=$(envsubst < vertex-payload.json)
 
+json_file="nemo_${MODEL_NAME}_${TRAIN_TYPE}_${NNODES}.json"
+
+echo $json_job | tee $json_file > /dev/null
+
+
+job_addr="https://${REGION}-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${REGION}/customJobs"
+
+echo "json_file:$json_file"
+echo "job_addr:$job_addr"
+
+set -x
+
 curl -X POST \
      -H "Authorization: Bearer $(gcloud auth print-access-token)" \
      -H "Content-Type: application/json; charset=utf-8" \
-     -d $json_job \
-     "https://$REGION-aiplatform.googleapis.com/v1/projects/$PROJECT_ID/locations/$REGION/customJobs"
+     -d "@$json_file" \
+     "https://us-central1-aiplatform.googleapis.com/v1/projects/google.com:vertex-training-dlexamples/locations/us-central1/customJobs"
+     # "$job_addr" TODO: pass the param job_addr to the curl command. does not work with parameterized values.
+
 
