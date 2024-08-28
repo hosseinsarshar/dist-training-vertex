@@ -28,7 +28,7 @@
               },
               {
                 "name": "CONFIG_PATH",
-                "value": "/workspace/dist-training-vertex/continual-pretraining/nemo/llama3-70b/"
+                "value": "/workspace/dist-training-vertex/nemo/config/"
               },
               {
                 "name": "CONFIG_NAME",
@@ -36,7 +36,7 @@
               },
               {
                 "name": "LOG_DIR",
-                "value": "/gcs/hosseins-vertex-training-dlexamples"
+                "value": "/tmp/log-dir"
               },
               {
                 "name": "NNODES",
@@ -71,7 +71,7 @@
               },
               {
                 "name": "CONFIG_PATH",
-                "value": "/workspace/dist-training-vertex/continual-pretraining/nemo/llama3-70b/"
+                "value": "/workspace/dist-training-vertex/nemo/config/"
               },
               {
                 "name": "CONFIG_NAME",
@@ -79,7 +79,7 @@
               },
               {
                 "name": "LOG_DIR",
-                "value": "/gcs/hosseins-vertex-training-dlexamples"
+                "value": "/tmp/log-dir"
               },
               {
                 "name": "NNODES",

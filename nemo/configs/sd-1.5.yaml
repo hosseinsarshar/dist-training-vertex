@@ -43,7 +43,6 @@ exp_manager:
     every_n_steps: 1
     cpu_offload: False
 
-
 model:
   precision: ${trainer.precision}
   # specify micro_batch_size, global_batch_size, and model parallelism
@@ -51,7 +50,9 @@ model:
   micro_batch_size: 16 # limited by GPU memory
   global_batch_size: 16 # will use more micro batches to reach global batch size
   native_amp_init_scale: 65536.0 # Init scale for grad scaler used at fp16
-
+  tensor_model_parallel_size: 1
+  pipeline_model_parallel_size: 1
+  virtual_pipeline_model_parallel_size: null
   linear_start: 0.00085
   linear_end: 0.012
   num_timesteps_cond: 1

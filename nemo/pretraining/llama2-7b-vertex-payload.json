@@ -37,7 +37,7 @@
               },
               {
                 "name": "LOG_DIR",
-                "value": "/gcs/hosseins-vertex-training-dlexamples"
+                "value": "/tmp/log-dir"
               },
               {
                 "name": "NNODES",
@@ -80,7 +80,7 @@
               },
               {
                 "name": "LOG_DIR",
-                "value": "/gcs/hosseins-vertex-training-dlexamples"
+                "value": "/tmp/log-dir"
               },
               {
                 "name": "NNODES",
