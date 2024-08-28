@@ -29,10 +29,10 @@ export PROJECT_ID=YOUR_PROJECT
 ```
 **note**: "--debug" is optional and will create the cluster, clone this repo and run sleep infinity to keep the cluster up. This is useful if you want to ssh into the machines directly, but it will not kick off the actual training job, you will have to do this manually on every node.
 
-To manually run the job, you must do so on every node, make sure to set the following environment variables:
+To manually run the job, you must do so on every node, the launch.sh script will set the following environment variables for you if running in --debug mode, otherwise, you'll need to set them manually. Please see below for examples (but again, you do not have to set these even when running manually if launching with launch.sh):
 
 ```
-NNODES=4
+NNODES=
 CONFIG_PATH="/workspace/dist-training-vertex/nemo/llama2-7b/"
 CONFIG_NAME="llama2-7b.yaml"
 ADDITIONAL_ARGS="++model.micro_batch_size=1 ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
