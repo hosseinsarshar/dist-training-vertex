@@ -1,6 +1,5 @@
-
 {
-    "displayName": "nemo_llama2_7b_4_nodes",
+    "displayName": "nemo_${MODEL_NAME}_${TRAIN_TYPE}_${NNODES}",
     "jobSpec": {
       "workerPoolSpecs": [
         {   
@@ -20,12 +19,12 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && $LAUNCH_CMD"
             ],
             "env": [
               {
                 "name": "ADDITIONAL_ARGS",
-                "value": "++trainer.max_steps=10 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+                "value": "$ADDITIONAL_ARGS"
               },
               {
                 "name": "CONFIG_PATH",
@@ -33,15 +32,15 @@
               },
               {
                 "name": "CONFIG_NAME",
-                "value": "llama2-7b.yaml"
+                "value": "$MODEL_NAME.json"
               },
               {
                 "name": "LOG_DIR",
-                "value": "."
+                "value": "$LOG_DIR"
               },
               {
                 "name": "NNODES",
-                "value": "4"
+                "value": "$NNODES"
               }
             ]
           }
@@ -52,7 +51,7 @@
             "acceleratorType": "NVIDIA_H100_MEGA_80GB",
             "acceleratorCount": 8
           },
-          "replicaCount": "3",
+          "replicaCount": "$REPLICA_COUNT",
           "diskSpec": {
             "bootDiskType": "pd-ssd",
             "bootDiskSizeGb": 100
@@ -63,12 +62,12 @@
                 "sh", "-c"
             ],
             "args": [
-              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
+              "git clone https://github.com/hosseinsarshar/dist-training-vertex.git && $LAUNCH_CMD"
             ],
             "env": [
               {
                 "name": "ADDITIONAL_ARGS",
-                "value": "++trainer.max_steps=10 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
+                "value": "$ADDITIONAL_ARGS"
               },
               {
                 "name": "CONFIG_PATH",
@@ -76,15 +75,15 @@
               },
               {
                 "name": "CONFIG_NAME",
-                "value": "llama2-7b.yaml"
+                "value": "$MODEL_NAME.yaml"
               },
               {
                 "name": "LOG_DIR",
-                "value": "."
+                "value": "$LOG_DIR"
               },
               {
                 "name": "NNODES",
-                "value": "4"
+                "value": "$NNODES"
               }
             ]
           }
@@ -93,4 +92,3 @@
       "enableWebAccess": true
     }
   }
-  
