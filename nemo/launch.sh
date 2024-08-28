@@ -75,6 +75,6 @@ json_job=$(envsubst < vertex-payload.json)
 curl -X POST \
      -H "Authorization: Bearer $(gcloud auth print-access-token)" \
      -H "Content-Type: application/json; charset=utf-8" \
-     -d $json_jo \
+     -d $json_job \
      "https://$REGION-aiplatform.googleapis.com/v1/projects/$PROJECT_ID/locations/$REGION/customJobs"
 
