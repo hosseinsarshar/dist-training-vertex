@@ -70,11 +70,6 @@ export GCS_PATH_TO_CKPT='gs://bucket/model.nemo
 ./launch.sh <continued-pretraining|full-sft> <MODEL_NAME> <LOG_DIR> [--debug]
 ```
 
-
-if in debug mode and launching the actual jobs manually, don't forget to add the following arguments to ADDITIONAL_ARGS:
-```
-++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
-```
 - proceed with training as usual
 
 ## 2- Stable Diffusion Diffusers with WebDataset (Pytorch)
