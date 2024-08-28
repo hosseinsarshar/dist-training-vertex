@@ -41,7 +41,7 @@ fi
 # == set job specific parameters based on model ==
 if [ $MODEL_NAME = 'llama3-70b' ]; then
     export NNODES=8
-    export MICRO_BATCH=2
+    export MICRO_BATCH=1
 elif [ $MODEL_NAME = 'llama2-7b' ]; then
     export NNODES=4
     export MICRO_BATCH=1
