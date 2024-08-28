@@ -42,9 +42,9 @@ fi
 export LAUNCH_CMD="git clone https://github.com/hosseinsarshar/dist-training-vertex.git &&"
 
 # add checkpoint transfer to launch command # NOTE: set BUCKET env var before calling launch.sh
-if [ $TRAIN_TYPE="continual-pretraining" ] || [ $TRAIN_TYPE="continual-pretraining" ]; then
+if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "continual-pretraining" ]; then
     export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
-    export LAUNCH_CMD="$LAUNCH_CMD && gsutil -m cp $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
+    export LAUNCH_CMD="$LAUNCH_CMD gsutil -m cp $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
     export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
 fi
 
@@ -56,13 +56,15 @@ else
 fi
 
 # == set job specific parameters based on model ==
-if [ $MODEL_NAME='llama3-70b' ]; then
+if [ $MODEL_NAME = 'llama3-70b' ]; then
     export NNODES=8
     export MICRO_BATCH=2
-elif [ $MODEL_NAME='llama2-7b' ]; then
+elif [ $MODEL_NAME = 'llama2-7b' ]; then
     export NNODES=4
     export MICRO_BATCH=1
 fi
+
+export REPLICA_COUNT=$(($NNODES-1))
 
 # == define additional args ==
 export ADDITIONAL_ARGS="++model.micro_batch_size=$MICRO_BATCH ++trainer.max_steps=2 ++trainer.limit_val_batches=0.0 ++trainer.val_check_interval=1"
