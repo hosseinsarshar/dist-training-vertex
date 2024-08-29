@@ -41,6 +41,10 @@
               {
                 "name": "NNODES",
                 "value": "$NNODES"
+              },
+              {
+                "name": "TRAIN_TYPE",
+                "value": "$TRAIN_TYPE"
               }
             ]
           }
@@ -84,6 +88,10 @@
               {
                 "name": "NNODES",
                 "value": "$NNODES"
+              },
+              {
+                "name": "TRAIN_TYPE",
+                "value": "$TRAIN_TYPE"
               }
             ]
           }

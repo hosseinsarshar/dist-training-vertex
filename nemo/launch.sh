@@ -55,7 +55,7 @@ export ADDITIONAL_ARGS="++model.micro_batch_size=$MICRO_BATCH ++trainer.max_step
 # == construct job launch command == 
 
 # create base job launch command 
-export LAUNCH_CMD="git clone https://github.com/hosseinsarshar/dist-training-vertex.git &&"
+export LAUNCH_CMD="git clone -b sft https://github.com/hosseinsarshar/dist-training-vertex.git &&"
 
 # add checkpoint transfer to launch command # NOTE: set BUCKET env var before calling launch.sh
 if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; then
@@ -91,7 +91,6 @@ curl -X POST \
      -H "Authorization: Bearer $(gcloud auth print-access-token)" \
      -H "Content-Type: application/json; charset=utf-8" \
      -d "@$json_file" \
-     "https://us-central1-aiplatform.googleapis.com/v1/projects/google.com:vertex-training-dlexamples/locations/us-central1/customJobs"
-     # "$job_addr" TODO: pass the param job_addr to the curl command. does not work with parameterized values.
+     $job_addr
 
 

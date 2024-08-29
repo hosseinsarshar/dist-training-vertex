@@ -88,10 +88,18 @@ echo DYNAMIC_ARGS:$DYNAMIC_ARGS
 echo CONFIG_PATH:$CONFIG_PATH
 echo CONFIG_NAME:$CONFIG_NAME
 echo LOG_DIR:$LOG_DIR
+echo TRAIN_TYPE:$TRAIN_TYPE
 
-if [ -z "$NNODES" ] || [ -z "$CONFIG_PATH" ] || [ -z "$CONFIG_NAME" ] || [ -z "$LOG_DIR" ]; then
+if [ -z "$NNODES" ] || [ -z "$CONFIG_PATH" ] || [ -z "$CONFIG_NAME" ] || [ -z "$LOG_DIR" ] || [ -z "$TRAIN_TYPE" ]; then
     echo "Error: Missing mandatory arguments."
     usage
+fi
+
+if [ "$TRAIN_TYPE" = "full-sft" ]; then
+    PYTHON_SCRIPT="/opt/NeMo/examples/nlp/language_modeling/tuning/megatron_gpt_finetuning.py"
+    DYNAMIC_ARGS="${DYNAMIC_ARGS} ++model.tensor_model_parallel_size=${GPUS_PER_NODE} ++model.pipeline_model_parallel_size=${NNODES}
+else
+    PYTHON_SCRIPT="/opt/NeMo/examples/nlp/language_modeling/megatron_gpt_pretraining.py"
 fi
 
 echo "sleep for 10 seconds to let services boot up"
