@@ -82,8 +82,9 @@ echo $json_job | tee $json_file > /dev/null
 
 job_addr="https://${REGION}-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${REGION}/customJobs"
 
-echo "json_file:$json_file"
-echo "job_addr:$job_addr"
+
+echo json_file:$json_file
+echo job_addr:$job_addr
 
 set -x
 
@@ -91,7 +92,7 @@ curl -X POST \
      -H "Authorization: Bearer $(gcloud auth print-access-token)" \
      -H "Content-Type: application/json; charset=utf-8" \
      -d "@$json_file" \
-     "https://us-central1-aiplatform.googleapis.com/v1/projects/google.com:vertex-training-dlexamples/locations/us-central1/customJobs"
+     $job_addr
      # "$job_addr" TODO: pass the param job_addr to the curl command. does not work with parameterized values.
 
 
