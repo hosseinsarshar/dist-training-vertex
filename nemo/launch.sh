@@ -66,6 +66,7 @@ if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; th
         RUN_CONFIGS="++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
     else 
         RUN_CONFIGS="++model.restore_from_path=$CONVERTED_MODEL_PATH"
+    fi
     export ADDITIONAL_ARGS="$ADDITIONAL_ARGS $RUN_CONFIGS"
 fi
 
