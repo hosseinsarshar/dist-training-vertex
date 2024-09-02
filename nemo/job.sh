@@ -113,7 +113,7 @@ torchrun  --nproc_per_node=${GPUS_PER_NODE} \
     --node_rank=$RANK \
     --rdzv_id $CLOUD_ML_JOB_ID \
     --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT \
-    /opt/NeMo/examples/nlp/language_modeling/megatron_gpt_pretraining.py \
+    $PYTHON_SCRIPT \
     --config-path=$CONFIG_PATH \
     --config-name=$CONFIG_NAME \
     $DYNAMIC_ARGS
