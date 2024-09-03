@@ -1,6 +1,6 @@
 run:
   name: llama3_70b
-  results_dir: ${base_results_dir}/${.name}
+  results_dir: "/tmp"
   time_limit: "0-01:30:00"
   dependency: "singleton"
 trainer:
