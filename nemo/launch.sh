@@ -58,7 +58,7 @@ export ADDITIONAL_ARGS="++model.micro_batch_size=$MICRO_BATCH ++trainer.max_step
 # == construct job launch command == 
 
 # create base job launch command 
-export LAUNCH_CMD="git clone https://github.com/hosseinsarshar/dist-training-vertex.git &&"
+export LAUNCH_CMD="git clone -b sync-copy https://github.com/hosseinsarshar/dist-training-vertex.git &&"
 
 # add checkpoint transfer to launch command # NOTE: set BUCKET env var before calling launch.sh
 if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; then
@@ -69,13 +69,13 @@ if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; th
         exit 1
     fi
     export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
-    export TRANSFER_MODEL_CMD="chmod +x ./utils/model_copy.sh && ./utils/model_copy.sh $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH $LOG_DIR &&"
+    export TRANSFER_MODEL_CMD="chmod +x ./dist-training-vertex/nemo/utils/model_copy.sh && ./dist-training-vertex/nemo/utils/model_copy.sh $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH $LOG_DIR &&"
     export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
 fi
 
 # if in debug mode add sleep infinity to launch command
 if [ -z "$DEBUG" ]; then
-    export LAUNCH_CMD="$LAUNCH_CMD chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
+    export LAUNCH_CMD="$LAUNCH_CMD $TRANSFER_MODEL_CMD chmod +x ./dist-training-vertex/nemo/job.sh && ./dist-training-vertex/nemo/job.sh"
 else 
     export LAUNCH_CMD="$LAUNCH_CMD sleep infinity"
 fi
