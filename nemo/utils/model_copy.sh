@@ -27,7 +27,7 @@ if [ "$RANK" -eq 0 ]; then
     touch "$COPY_COMPLETE_PATH"
     echo "The checkpoint is copied on RANK=$RANK."
 else
-    echo "RANK is not 0. Waiting for copy-complete.txt to be created at $COPY_COMPLETE_PATH ..."
+    echo "On RANK $RANK, waiting for copy-complete.txt to be created at $COPY_COMPLETE_PATH ..."
     
     # Repeatedly check if the file exists
     while [ ! -f "$COPY_COMPLETE_PATH" ]; do
