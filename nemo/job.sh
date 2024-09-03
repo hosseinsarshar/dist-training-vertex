@@ -97,7 +97,7 @@ fi
 
 if [ "$TRAIN_TYPE" = "full-sft" ]; then
     PYTHON_SCRIPT="/opt/NeMo/examples/nlp/language_modeling/tuning/megatron_gpt_finetuning.py"
-    DYNAMIC_ARGS="${DYNAMIC_ARGS} ++model.tensor_model_parallel_size=${GPUS_PER_NODE} ++model.pipeline_model_parallel_size=${NNODES}"
+    DYNAMIC_ARGS="${DYNAMIC_ARGS}" #++model.tensor_model_parallel_size=${GPUS_PER_NODE} ++model.pipeline_model_parallel_size=${NNODES}"
 else
     PYTHON_SCRIPT="/opt/NeMo/examples/nlp/language_modeling/megatron_gpt_pretraining.py"
 fi
