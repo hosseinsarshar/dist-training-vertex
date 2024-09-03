@@ -37,4 +37,3 @@ else
     echo "$COPY_COMPLETE_PATH found on RANK=$RANK. Resuming the operation."
     # Place the rest of your script here
 fi
-
