@@ -65,9 +65,9 @@ Whether running in --debug mode or launching a full job using launch.sh, set GCS
 
 ex:
 ```
-export GCS_PATH_TO_CKPT='gs://bucket/model.nemo
+export GCS_PATH_TO_CKPT=gs://bucket/model.nemo
 
-./launch.sh <continued-pretraining|full-sft> <MODEL_NAME> <LOG_DIR> [--debug]
+./launch.sh <continual-pretraining|full-sft> <llama3-70b|llama2-7b> <LOG_DIR> [--debug]
 ```
 
 - proceed with training as usual
