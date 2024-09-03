@@ -66,7 +66,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "sleep 5m && ${LAUNCH_CMD}"
+              "sleep 5m && ${TRANSFER_MODEL_CMD} && ${LAUNCH_CMD}"
             ],
             "env": [
               {
