@@ -62,6 +62,7 @@ def main():
     # Broadcast the message from rank 0 to all other ranks
     while message is None:
         message = comm.bcast(message, root=0)
+        print(f"Rank {rank} received the message: [{message}] - sleeping for 5 seconds")
         time.sleep(5)
 
     # All ranks continue with their jobs after receiving the message
