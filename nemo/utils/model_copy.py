@@ -27,6 +27,9 @@ def main():
     rank = comm.Get_rank()
     size = comm.Get_size()
 
+    print(f'RANK is [{rank}] from comm.Get_rank()')
+    print(f'Size is [{size}] from comm.Get_size()')
+    print(f"Rank {rank}: Total number of ranks participating in MPI: {size}")
     rank = int(os.getenv('RANK', -1))  # Default to -1 if the RANK variable is not set
 
     if rank == -1:
