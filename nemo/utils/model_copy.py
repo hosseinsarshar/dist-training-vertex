@@ -2,6 +2,7 @@ from mpi4py import MPI
 import subprocess
 import argparse
 import os
+import time
 
 def gcloud_storage_copy(src, dest):
     """
@@ -53,11 +54,14 @@ def main():
     if rank == 0:
         # Prepare a message to broadcast after the operation is complete
         message = "Copy Complete"
+        message = comm.bcast(message, root=0)
     else:
         message = None
 
     # Broadcast the message from rank 0 to all other ranks
-    message = comm.bcast(message, root=0)
+    while message is None:
+        message = comm.bcast(message, root=0)
+        time.sleep(5)
 
     # All ranks continue with their jobs after receiving the message
     print(f"Rank {rank} received the message: {message}")
