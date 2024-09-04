@@ -14,7 +14,7 @@ usage() {
     echo
     echo "  <TRAIN_TYPE>     Job type (options: pretraining,continual-pretraining,full-sft)"
     echo "  <MODEL_NAME>     Model name (options: llama2-7b,llama3-70b)"
-    echo "  <LOG_DIR>        Path to the local storage (e.g. /tmp/...) or a gcs bucket (in this format /gcs/NAME_OF_BUCKET) - for continual-pretraining or fine-tuning, this path should be Google Storage (/gcs/NAME_OF_BUCKET/...)"
+    echo "  <LOG_DIR>        Path to the local storage (e.g. /tmp/...) or a gcs bucket (in this format /gcs/NAME_OF_BUCKET)"
     echo "  --debug          Pass sleep infinity to launch command"
     exit 1
 }
@@ -62,16 +62,10 @@ export LAUNCH_CMD="git clone -b sync-copy-mpi https://github.com/hosseinsarshar/
 
 # add checkpoint transfer to launch command # NOTE: set BUCKET env var before calling launch.sh
 if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; then
-    # if [[ "$LOG_DIR" == "/gcs/"* ]]; then
-    # else
-    #     echo "The LOG_DIR does not start with [/gcs/]- training type is [$TRAIN_TYPE] and LOG_DIR is not set properly - please set it to a gcs bucket to be able to run this script"
-    #     exit 1
-    # fi
-    
     echo "Transferring nemo checkpoint file"
 
     export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
-    export TRANSFER_MODEL_CMD="mpirun --allow-run-as-root --map-by ppr:1:node python dist-training-vertex/nemo/utils/model_copy.py $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH $LOG_DIR &&"
+    export TRANSFER_MODEL_CMD="chmod +x ./dist-training-vertex/nemo/utils/model_copy.sh && ./dist-training-vertex/nemo/utils/model_copy.sh $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
     export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
 fi
 

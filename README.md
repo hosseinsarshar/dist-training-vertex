@@ -15,7 +15,7 @@ Follow these steps to run this example:
 export REGION=us-central1
 export PROJECT_ID=YOUR_PROJECT
 
-./launch.sh pretraining llama2-7b /tmp
+./launch.sh pretraining <llama3-70b|llama2-7b> /tmp
 ```
 
 **More examples for launch.sh:**

@@ -17,15 +17,15 @@ fi
 if [ "$RANK" -eq 0 ]; then
     echo "Copying the checkpoint from $1 to $2"
 else
-    echo "On RANK $RANK, waiting for copy-complete.txt to be created at $COPY_COMPLETE_PATH ..."
+    echo "On RANK $RANK, waiting for the copy on RANK 0 to complete ..."
 fi
 
 torchrun  --nproc_per_node=1 \
-    --nnodes=2 \
+    --nnodes=${NNODES} \
     --rdzv-backend=static \
     --node_rank=$RANK \
     --rdzv_id $CLOUD_ML_JOB_ID \
     --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT \
     dist-training-vertex/nemo/utils/model_copy.py --src $1 --dest $2
 
-echo "Copying the checkpoint from $1 to $2 completed RANK=$RANK. Continuing to the next step of the training."
+echo "RANK=$RANK - Copying the checkpoint from [$1] to [$2] completed. Continuing to the next step of the training."
