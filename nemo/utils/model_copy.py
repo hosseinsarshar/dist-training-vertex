@@ -17,8 +17,8 @@ def gcloud_storage_copy(src, dest):
 def main():
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Run gcloud storage copy operation with MPI.')
-    parser.add_argument('--GCS_PATH_TO_CKPT', type=str, required=True, help='GCS path to checkpoint')
-    parser.add_argument('--CONVERTED_MODEL_PATH', type=str, required=True, help='Converted model destination path')
+    parser.add_argument('--src', type=str, required=True, help='GCS path to checkpoint')
+    parser.add_argument('--dest', type=str, required=True, help='Converted model destination path')
 
     args = parser.parse_args()
 
@@ -37,8 +37,8 @@ def main():
 
     if rank == 0:
         # Rank 0 performs the gcloud storage copy operation before the barrier
-        src_location = args.GCS_PATH_TO_CKPT
-        dest_location = args.CONVERTED_MODEL_PATH
+        src_location = args.src
+        dest_location = args.dest
         
         print(f"Rank 0 is copying from {src_location} to {dest_location}")
         
