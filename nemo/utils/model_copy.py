@@ -11,7 +11,7 @@ def gcloud_storage_copy(src, dest):
     try:
         # Execute the gcloud command to copy files from src to dest
         # subprocess.run(["gcloud", "storage", "cp", src, dest], check=True)
-        time.sleep(60)
+        time.sleep(15)
         print(f"Successfully copied from {src} to {dest} on RANK=0")
     except subprocess.CalledProcessError as e:
         print(f"Error copying files: {e} on RANK=0")
