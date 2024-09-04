@@ -65,7 +65,7 @@ if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; th
     echo "Transferring nemo checkpoint file"
 
     export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
-    export TRANSFER_MODEL_CMD="chmod +x ./dist-training-vertex/nemo/utils/model_copy.sh && ./dist-training-vertex/nemo/utils/model_copy.sh $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
+    export TRANSFER_MODEL_CMD="chmod +x ./dist-training-vertex/nemo/utils/model_copy_launcher.sh && ./dist-training-vertex/nemo/utils/model_copy_launcher.sh $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH &&"
     export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
 fi
 
