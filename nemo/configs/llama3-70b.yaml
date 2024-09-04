@@ -47,6 +47,9 @@ exp_manager:
     buffer_size: 5
   seconds_to_sleep: 60
 model:
+  peft:
+    peft_scheme: null  # can be either adapter,ia3, or ptuning
+    restore_from_path: null
   mcore_gpt: true
   micro_batch_size: 1
   global_batch_size: 1024
