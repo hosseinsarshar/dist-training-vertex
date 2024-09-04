@@ -1,8 +1,13 @@
-from mpi4py import MPI
-import subprocess
-import argparse
+import torch
+import torch.distributed as dist
+from datetime import timedelta
 import os
 import time
+import subprocess
+import argparse
+
+# Set up a process group with a custom timeout
+dist.init_process_group(backend='nccl', timeout=timedelta(minutes=30))
 
 def gcloud_storage_copy(src, dest):
     """
@@ -25,14 +30,8 @@ def main():
     args = parser.parse_args()
 
     # Initialize MPI
-    comm = MPI.COMM_WORLD
-    rank = comm.Get_rank()
-    size = comm.Get_size()
-
-    print(f'RANK is [{rank}] from comm.Get_rank()')
-    print(f'Size is [{size}] from comm.Get_size()')
-    print(f"Rank {rank}: Total number of ranks participating in MPI: {size}")
     rank = int(os.getenv('RANK', -1))  # Default to -1 if the RANK variable is not set
+    print(f"Rank {rank}")
 
     if rank == -1:
         raise ValueError("Error: RANK environment variable is not set.")
@@ -50,23 +49,14 @@ def main():
         print(f"Rank={rank} is waiting for the copy operation to complete.")
 
     # Ensure all processes are synchronized after the copy
-    comm.Barrier()
-
-    if rank == 0:
-        # Prepare a message to broadcast after the operation is complete
-        message = "Copy Complete"
-        message = comm.bcast(message, root=0)
-    else:
-        message = None
-
-    # Broadcast the message from rank 0 to all other ranks
-    while message is None:
-        message = comm.bcast(message, root=0)
-        print(f"Rank {rank} received the message: [{message}] - sleeping for 5 seconds")
-        time.sleep(5)
+    dist.barrier()
 
     # All ranks continue with their jobs after receiving the message
-    print(f"Rank {rank} received the message: {message}")
+    print(f"Rank {rank} is done")
+
+    dist.destroy_process_group()
+
+    print(f"Rank {rank} called dist.destroy_process_group()")
 
     # Continue with the specific job for this rank
     # Your distributed job code here...
