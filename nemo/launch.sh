@@ -58,7 +58,7 @@ export ADDITIONAL_ARGS="++model.micro_batch_size=$MICRO_BATCH ++trainer.max_step
 # == construct job launch command == 
 
 # create base job launch command 
-export LAUNCH_CMD="git clone -b sync-copy-mpi https://github.com/hosseinsarshar/dist-training-vertex.git &&"
+export LAUNCH_CMD="git clone https://github.com/hosseinsarshar/dist-training-vertex.git &&"
 
 # add checkpoint transfer to launch command # NOTE: set BUCKET env var before calling launch.sh
 if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; then
