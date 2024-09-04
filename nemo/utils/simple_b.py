@@ -2,6 +2,7 @@ from mpi4py import MPI
 
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
+print(f"Rank {rank} started")
 
 # Rank 0 prepares data to broadcast
 if rank == 0:
