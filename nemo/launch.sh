@@ -58,18 +58,20 @@ export ADDITIONAL_ARGS="++model.micro_batch_size=$MICRO_BATCH ++trainer.max_step
 # == construct job launch command == 
 
 # create base job launch command 
-export LAUNCH_CMD="git clone -b sync-copy https://github.com/hosseinsarshar/dist-training-vertex.git &&"
+export LAUNCH_CMD="git clone -b sync-copy-mpi https://github.com/hosseinsarshar/dist-training-vertex.git &&"
 
 # add checkpoint transfer to launch command # NOTE: set BUCKET env var before calling launch.sh
 if [ $TRAIN_TYPE = "continual-pretraining" ] || [ $TRAIN_TYPE = "full-sft" ]; then
-    if [[ "$LOG_DIR" == "/gcs/"* ]]; then
-        echo "Transferring nemo checkpoint file"
-    else
-        echo "The LOG_DIR does not start with [/gcs/]- training type is [$TRAIN_TYPE] and LOG_DIR is not set properly - please set it to a gcs bucket to be able to run this script"
-        exit 1
-    fi
+    # if [[ "$LOG_DIR" == "/gcs/"* ]]; then
+    # else
+    #     echo "The LOG_DIR does not start with [/gcs/]- training type is [$TRAIN_TYPE] and LOG_DIR is not set properly - please set it to a gcs bucket to be able to run this script"
+    #     exit 1
+    # fi
+    
+    echo "Transferring nemo checkpoint file"
+
     export CONVERTED_MODEL_PATH="/workspace/converted_models/$MODEL_NAME.nemo"
-    export TRANSFER_MODEL_CMD="chmod +x ./dist-training-vertex/nemo/utils/model_copy.sh && ./dist-training-vertex/nemo/utils/model_copy.sh $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH $LOG_DIR &&"
+    export TRANSFER_MODEL_CMD="mpirun --allow-run-as-root --map-by ppr:1:node python dist-training-vertex/nemo/utils/model_copy.py $GCS_PATH_TO_CKPT $CONVERTED_MODEL_PATH $LOG_DIR &&"
     export ADDITIONAL_ARGS="$ADDITIONAL_ARGS ++model.resume_from_checkpoint=$CONVERTED_MODEL_PATH"
 fi
 

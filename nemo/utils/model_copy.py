@@ -1,6 +1,7 @@
 from mpi4py import MPI
 import subprocess
 import argparse
+import os
 
 def gcloud_storage_copy(src, dest):
     """
@@ -9,9 +10,9 @@ def gcloud_storage_copy(src, dest):
     try:
         # Execute the gcloud command to copy files from src to dest
         subprocess.run(["gcloud", "storage", "cp", src, dest], check=True)
-        print(f"Successfully copied from {src} to {dest}")
+        print(f"Successfully copied from {src} to {dest} on RANK=0")
     except subprocess.CalledProcessError as e:
-        print(f"Error copying files: {e}")
+        print(f"Error copying files: {e} on RANK=0")
 
 def main():
     # Parse command-line arguments
@@ -26,6 +27,11 @@ def main():
     rank = comm.Get_rank()
     size = comm.Get_size()
 
+    rank = int(os.getenv('RANK', -1))  # Default to -1 if the RANK variable is not set
+
+    if rank == -1:
+        raise ValueError("Error: RANK environment variable is not set.")
+
     if rank == 0:
         # Rank 0 performs the gcloud storage copy operation before the barrier
         src_location = args.GCS_PATH_TO_CKPT
@@ -35,6 +41,8 @@ def main():
         
         # Run the gcloud copy operation (this can take time)
         gcloud_storage_copy(src_location, dest_location)
+    else:
+        print(f"Rank={rank} is waiting for the copy operation to complete.")
 
     # Ensure all processes are synchronized after the copy
     comm.Barrier()
