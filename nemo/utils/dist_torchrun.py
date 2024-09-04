@@ -21,7 +21,9 @@ else:
 # Barrier with a timeout in place
 dist.barrier()
 
-print("Ranks 0 is sleeping")
+print(f"Rank {rank} is done")
 
 # Clean up
 dist.destroy_process_group()
+
+print(f"Rank {rank} called dist.destroy_process_group()")
