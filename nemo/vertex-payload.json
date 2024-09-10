@@ -19,7 +19,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "${TRANSFER_MODEL_CMD} ${LAUNCH_CMD}"
+              "${LAUNCH_CMD}"
             ],
             "env": [
               {
@@ -62,7 +62,7 @@
                 "sh", "-c"
             ],
             "args": [
-              "$LAUNCH_CMD"
+              "${LAUNCH_CMD}"
             ],
             "env": [
               {
